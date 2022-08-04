@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   background: var(--purple-100);
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 
   display: flex;
@@ -12,10 +12,6 @@ export const Container = styled.div`
 
   @media (max-width: 575.98px) {
     padding-top: 3rem;
-    height: auto;
-  }
-  @media (min-width: 575.99px) and (max-width: 991.98px) {
-    height: 100vh;
   }
 
   form {
@@ -24,4 +20,12 @@ export const Container = styled.div`
   }
 `;
 
-export const OtherOption = styled.p``;
+export const OtherOption = styled.p`
+  a {
+    color: var(--purple-100);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;

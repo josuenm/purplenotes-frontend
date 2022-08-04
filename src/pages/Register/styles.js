@@ -20,3 +20,13 @@ export const Container = styled.div`
     flex-direction: column;
   }
 `;
+
+export const OtherOption = styled.p`
+  a {
+    color: var(--purple-100);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
