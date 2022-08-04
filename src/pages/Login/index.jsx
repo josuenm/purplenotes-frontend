@@ -11,16 +11,20 @@ import { Submit } from "../../components/Form/Submit";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
 import * as yup from "yup";
 
 const schema = yup
   .object({
-    email: yup.string().required(),
-    password: yup.string().required(),
+    email: yup.string().required("Email is required"),
+    password: yup.string().required("Passoword is required"),
   })
   .required();
 
 export function Login() {
+  const { Login } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -28,7 +32,9 @@ export function Login() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    Login(data);
+  };
 
   return (
     <Container>
