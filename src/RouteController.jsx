@@ -10,11 +10,6 @@ export default function RouteController() {
   const pathname = window.location.pathname;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (pathname !== "/users/edit")
-      localStorage.getItem("user") && navigate("/notes", { replace: true });
-  }, [navigate, pathname]);
-
   return (
     <>
       {localStorage.getItem("user") ? <HeaderLogged /> : <Header />}
