@@ -7,14 +7,21 @@ export const GlobalToolsContext = createContext(null);
 
 export const GlobalToolsContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [error, setError] = useState("");
 
   function handleLoading(value) {
     setIsLoading(value);
   }
 
+  function handleSidebar(value) {
+    setSidebarIsOpen(value);
+  }
+
   return (
-    <GlobalToolsContext.Provider value={{ handleLoading }}>
+    <GlobalToolsContext.Provider
+      value={{ handleLoading, sidebarIsOpen, handleSidebar }}
+    >
       {isLoading && (
         <AnimatePresence>
           <motion.div
