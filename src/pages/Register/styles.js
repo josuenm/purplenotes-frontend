@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
   background: var(--purple-100);
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
+  padding-top: 3rem;
 
   display: flex;
   justify-content: center;
@@ -12,15 +13,10 @@ export const Container = styled.div`
 
   @media (max-width: 575.98px) {
     padding-top: 3rem;
-    height: auto;
-  }
-  @media (min-width: 575.99px) and (max-width: 991.98px) {
-    height: 100vh;
   }
 
   form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
   }
 `;
