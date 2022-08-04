@@ -1,22 +1,27 @@
-import { useNavigate, Route, Routes } from "react-router-dom";
+import { useNavigate, Route, Routes, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
+import { Dashboard } from "./pages/Dashboard";
 import { Header } from "./components/Header";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { HeaderLogged } from "./components/HeaderLogged";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { UserContext } from "./contexts/userContext";
 
 export default function RouteController() {
-  const pathname = window.location.pathname;
+  const pathname = useLocation();
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
 
   return (
     <>
-      {localStorage.getItem("user") ? <HeaderLogged /> : <Header />}
+      {!!user ? <HeaderLogged /> : <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );
