@@ -1,61 +1,72 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AccessModal, Input, Submit } from "../../components/AccessModal";
-import { Container } from "./styles";
-import { UserServices } from "../../services/users";
+import { Link } from "react-router-dom";
+import { Container, OtherOption } from "./styles";
 import { Head } from "../../components/Head";
 
+import { AccessModal } from "../../components/Form/AccessModal";
+import { Input } from "../../components/Form/Inputs";
+import { Set } from "../../components/Form/Set";
+import { ErrorMessage } from "../../components/Form/ErrorMessage";
+import { Label } from "../../components/Form/Label";
+import { Submit } from "../../components/Form/Submit";
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup
+  .object({
+    email: yup.string().required(),
+    password: yup.string().required(),
+  })
+  .required();
+
 export function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [error, setError] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  const navigate = useNavigate();
-
-  async function tryConnection(e) {
-    e.preventDefault();
-
-    setIsDisabled(true);
-
-    try {
-      const response = await UserServices.login({
-        email: email,
-        password: password,
-      });
-      dispatch(login(response.user));
-
-      navigate("/notes", { replace: true });
-    } catch (err) {
-      setIsDisabled(false);
-      setError(err);
-    }
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+  const onSubmit = (data) => console.log(data);
 
   return (
     <Container>
       <Head title="Login | JavaScript Notes" description="" />
 
       <AccessModal>
-        <form onSubmit={tryConnection}>
-          <Input type="email" value={email} change={setEmail} label="E-mail" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Set>
+            <Label title="E-mail:" htmlFor="email" />
+            <Input
+              type="email"
+              htmlFor="email"
+              placeholder="Type your password"
+              register={{ ...register("email") }}
+            />
+            {errors.email && <ErrorMessage title={errors.email.message} />}
+          </Set>
 
-          <Input
-            type="password"
-            value={password}
-            change={setPassword}
-            label="Password"
-            password={true}
-          />
+          <Set>
+            <Label title="Password:" htmlFor="password" />
+            <Input
+              type="password"
+              htmlFor="password"
+              placeholder="Type your password"
+              register={{ ...register("password") }}
+            />
+            {errors.password && (
+              <ErrorMessage title={errors.password.message} />
+            )}
+          </Set>
 
-          {error && <p className="error">Email or password invalid</p>}
-
-          <Submit value="Login" isDisabled={isDisabled} />
+          <Set>
+            <Submit value="Login" isDisabled={false} />
+          </Set>
+          <OtherOption>
+            Doesn't have an account? <Link to="/register">Register</Link>
+          </OtherOption>
         </form>
-        <p>
-          Doesn't have an account? <Link to="/register">Register</Link>
-        </p>
       </AccessModal>
     </Container>
   );
