@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { Container, OtherOption } from "./styles";
 import { Link } from "react-router-dom";
 import { Head } from "../../components/Head";
 
@@ -10,18 +10,22 @@ import { Label } from "../../components/Form/Label";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { ErrorMessage } from "../../components/Form/ErrorMessage";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/userContext";
+import * as yup from "yup";
 
 const schema = yup
   .object({
-    name: yup.string().required(),
-    email: yup.string().required(),
-    password: yup.string().required(),
+    name: yup.string().required("Name is required"),
+    email: yup.string().required("Email is required"),
+    password: yup.string().required("Password is required"),
   })
   .required();
 
 export function Register() {
+  const { Register } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -29,7 +33,9 @@ export function Register() {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    Register(data);
+  };
 
   return (
     <Container>
@@ -74,9 +80,9 @@ export function Register() {
 
           <Set>
             <Submit value="Register" />
-            <p>
+            <OtherOption>
               Already have an account? <Link to="/login">Login</Link>
-            </p>
+            </OtherOption>
           </Set>
         </form>
       </AccessModal>
