@@ -35,7 +35,7 @@ export const NotesServices = {
       .catch((error) => error.response);
   },
 
-  deleteNote: async (id) => {
+  delete: async (id) => {
     await api
       .delete(`/${id}`, {
         headers: {
