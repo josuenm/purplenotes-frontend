@@ -14,6 +14,7 @@ export const UserContextProvider = ({ children }) => {
 
   function handleUser({ name, email }) {
     localStorage.setItem("jsnotes.user", JSON.stringify({ name, email }));
+    setUser({ name, email });
   }
 
   async function Login(data) {
@@ -52,13 +53,32 @@ export const UserContextProvider = ({ children }) => {
     handleLoading(false);
   }
 
+  async function UpdateBasicInfo(data) {
+    if (user.name === data.name && user.email === data.email) {
+      return;
+    }
+    handleLoading(true);
+    const response = await UserServices.updateBasicInfo(data);
+
+    switch (response.status) {
+      case 200:
+        handleUser({
+          name: response.data.name,
+          email: response.data.email,
+        });
+        break;
+    }
+
+    handleLoading(false);
+  }
+
   useEffect(() => {
     const userLocalStorage = JSON.parse(localStorage.getItem("jsnotes.user"));
     setUser(userLocalStorage);
   }, []);
 
   return (
-    <UserContext.Provider value={{ Login, Register, user }}>
+    <UserContext.Provider value={{ Login, Register, user, UpdateBasicInfo }}>
       {children}
     </UserContext.Provider>
   );
