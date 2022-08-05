@@ -60,13 +60,13 @@ const BasicInfoBox = () => {
       <Title>Personal Information</Title>
       <SimpleBox onSubmit={handleSubmit(onSubmit)}>
         <Set>
-          <Label title="Name:" htmlFor="name" />
+          <Label title="Name:" htmlFor="name" type="text" />
           <Input register={{ ...register("name") }} htmlFOr="name" />
           {errors.name && <ErrorMessage title={errors.name.message} />}
         </Set>
 
         <Set>
-          <Label title="Email:" htmlFor="email" />
+          <Label title="Email:" htmlFor="email" type="email" />
           <Input register={{ ...register("email") }} htmlFor="email" />
           {errors.email && <ErrorMessage title={errors.email.message} />}
         </Set>
@@ -79,14 +79,24 @@ const BasicInfoBox = () => {
 };
 
 const PasswordBox = () => {
+  const { UpdatePassword } = useContext(UserContext);
+
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(passwordSchema),
   });
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    const response = UpdatePassword(data);
+
+    if (response) {
+      setValue("password", "");
+      setValue("passwordConfirmation", "");
+    }
+  };
 
   return (
     <Box>
@@ -94,7 +104,11 @@ const PasswordBox = () => {
       <SimpleBox onSubmit={handleSubmit(onSubmit)}>
         <Set>
           <Label title="New password:" htmlFor="password" />
-          <Input register={{ ...register("password") }} htmlFor="password" />
+          <Input
+            register={{ ...register("password") }}
+            htmlFor="password"
+            type="password"
+          />
           {errors.password && <ErrorMessage title={errors.password.message} />}
         </Set>
         <Set>
@@ -105,6 +119,7 @@ const PasswordBox = () => {
           <Input
             register={{ ...register("passwordConfirmation") }}
             htmlFor="passwordConfirmation"
+            type="password"
           />
           {errors.passwordConfirmation && (
             <ErrorMessage title={errors.passwordConfirmation.message} />
@@ -120,10 +135,14 @@ const PasswordBox = () => {
 };
 
 const DeleteButtonBox = () => {
+  const { DeleteAccount } = useContext(UserContext);
+
   return (
     <Box>
       <DeleteButtonContainer>
-        <DeleteButton>Delete Account</DeleteButton>
+        <DeleteButton onClick={() => DeleteAccount()}>
+          Delete Account
+        </DeleteButton>
       </DeleteButtonContainer>
     </Box>
   );
