@@ -4,6 +4,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { Header } from "./components/Header";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
+import { UserEdit } from "./pages/UserEdit";
 import { HeaderLogged } from "./components/HeaderLogged";
 import { useContext, useEffect } from "react";
 import { UserContext } from "./contexts/userContext";
@@ -22,6 +23,7 @@ export default function RouteController() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/user/edit" element={<UserEdit />} />
       </Routes>
     </>
   );
