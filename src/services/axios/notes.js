@@ -7,7 +7,7 @@ const api = axios.create({
 
 export const NotesServices = {
   allNotes: async () => {
-    api
+    return await api
       .get("/", {
         headers: {
           "jsnotes.token": nookies.get()["jsnotes.token"],
@@ -18,10 +18,13 @@ export const NotesServices = {
   },
 
   create: async () => {
-    await api
+    return await api
       .post(
         "/",
-        { title: "New note", body: "<p>New note</p>" },
+        {
+          title: "New note",
+          body: "<p>New note</p>",
+        },
         {
           headers: {
             "jsnotes.token": nookies.get()["jsnotes.token"],
