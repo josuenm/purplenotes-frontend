@@ -20,9 +20,9 @@ export const UserServices = {
       .catch((error) => error.response);
   },
 
-  updateBasics: async (params) => {
+  updateBasicInfo: async (params) => {
     return await api
-      .put("", params, {
+      .put("/", params, {
         headers: { "jsnotes.token": nookies.get()["jsnotes.token"] },
       })
       .then((data) => data)
