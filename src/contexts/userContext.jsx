@@ -72,13 +72,51 @@ export const UserContextProvider = ({ children }) => {
     handleLoading(false);
   }
 
+  async function UpdatePassword(data) {
+    handleLoading(true);
+    const response = await UserServices.updatePassword(data);
+
+    switch (response.status) {
+      case 200:
+        handleLoading(false);
+        return true;
+        break;
+    }
+
+    handleLoading(false);
+  }
+
+  async function DeleteAccount() {
+    handleLoading(true);
+    const response = await UserServices.deleteAccount();
+
+    switch (response.status) {
+      case 204:
+        localStorage.removeItem("jsnotes.token");
+        await nookies.destroy(null, "jsnotes.token");
+        navigation("/");
+        break;
+    }
+
+    handleLoading(false);
+  }
+
   useEffect(() => {
     const userLocalStorage = JSON.parse(localStorage.getItem("jsnotes.user"));
     setUser(userLocalStorage);
   }, []);
 
   return (
-    <UserContext.Provider value={{ Login, Register, user, UpdateBasicInfo }}>
+    <UserContext.Provider
+      value={{
+        Login,
+        Register,
+        user,
+        UpdateBasicInfo,
+        UpdatePassword,
+        DeleteAccount,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
