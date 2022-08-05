@@ -1,51 +1,46 @@
-import React, { useEffect, useState } from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import { useDispatch, useSelector } from "react-redux"
-import { selectCurrentNote } from "../../redux/slices/notesSlice";
-import { closeSidebar, selectSidebar } from "../../redux/slices/popUpSlice"
+import React, { useContext, useEffect, useState } from "react";
+import ReactQuill from "react-quill";
+import { useDispatch, useSelector } from "react-redux";
+import "react-quill/dist/quill.snow.css";
+import { NotesContext } from "../../contexts/notesContext";
 
-import { Container } from "./styles"
+import { Container } from "./styles";
+import { GlobalToolsContext } from "../../contexts/globalToolsContext";
 
-export function Editor({classN, updateNote}) {
-  
-  const sidebarState = useSelector(selectSidebar)
-  const currentNoteState = useSelector(selectCurrentNote)
-  const dispatch = useDispatch()
+export function Editor({ updateNote }) {
+  const [currentContent, setCurrentContent] = useState("");
+  const [timer, setTimer] = useState(null);
 
-  const [currentContent, setCurrentContent] = useState('');
-
-  const [timer, setTimer] = useState(null)
-
-  useEffect(() => {
-    setCurrentContent(currentNoteState.body)
-  }, [currentNoteState])
+  const { currentNote } = useContext(NotesContext);
+  const { sidebarIsOpen } = useContext(GlobalToolsContext);
 
   const update = (content) => {
-    const title = content.replace(/<(.|\n)*?>/ig, "").slice(0,30)
-    updateNote(currentNoteState, {'title': title, 'body': content})
-  }
+    const title = content.replace(/<(.|\n)*?>/gi, "").slice(0, 30);
+    updateNote(currentNote, { title: title, body: content });
+  };
 
   const handleChange = (content, delta, source) => {
-    clearTimeout(timer)
-    if(source === 'user') {
-      setCurrentContent(content)
-      setTimer(setTimeout(() => update(content), 2000))
+    clearTimeout(timer);
+    if (source === "user") {
+      setCurrentContent(content);
+      setTimer(setTimeout(() => update(content), 2000));
     }
-  }
+  };
+
+  useEffect(() => {
+    if (currentNote) {
+      setCurrentContent(currentNote.body);
+    }
+  }, [currentNote]);
 
   return (
-    <Container 
-    onClick={() => sidebarState && dispatch(closeSidebar())} 
-    className={sidebarState ? 'active' : ''}>
-
-      <ReactQuill 
-      theme="snow" 
-      value={currentContent} 
-      className={`editor ${classN}`}
-      onChange={handleChange}
+    <Container>
+      <ReactQuill
+        theme="snow"
+        value={currentContent}
+        className={sidebarIsOpen ? "editor active" : "editor"}
+        onChange={handleChange}
       />
-      
     </Container>
   );
 }
