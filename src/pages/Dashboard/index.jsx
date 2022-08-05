@@ -1,54 +1,24 @@
-import { Container } from "./styles"
-import { Sidebar } from "../../components/Sidebar"
-import { useCallback, useEffect } from "react"
-import { NotesServices } from "../../services/notes"
-import { Editor } from "../../components/Editor"
-import { useSelector } from "react-redux"
-import { selectSidebar } from "../../redux/slices/popUpSlice"
-import { updateNotes, currentNote, clearCurrentNote } from "../../redux/slices/notesSlice"
-import { useDispatch } from "react-redux"
+import { Container } from "./styles";
+import { Sidebar } from "../../components/Sidebar";
+import { NotesServices } from "../../services/axios/notes";
+import { Editor } from "../../components/Editor";
+import { useContext } from "react";
+import { GlobalToolsContext } from "../../contexts/globalToolsContext";
+import { NotesContext } from "../../contexts/notesContext";
 
 export function Dashboard() {
-    const dispatch = useDispatch()
-    const sidebarState = useSelector(selectSidebar)
+  const { sidebarIsOpen } = useContext(GlobalToolsContext);
+  const { update } = useContext(NotesContext);
 
-    const getNotes = useCallback(( async () => {
-        const response = await NotesServices.allNotes()
-        if(response.data.length > 0) {
-            dispatch(updateNotes(response.data.reverse()))
-            const firstData = {
-                title: response.data[0].title,
-                body: response.data[0].body,
-                id: response.data[0]._id
-            }
-            dispatch(currentNote(firstData))
-        } else {
-            dispatch(updateNotes([]))
-            dispatch(clearCurrentNote())
-        }
-    }), [dispatch])
+  const updateNote = async (oldNote, params) => {
+    const updatedNote = await update(oldNote.id, params);
+  };
 
-    const updateNote = async (oldNote, params) => {
-        const updatedNote = await NotesServices.update(oldNote.id, params)
-        
-        const newNote = {
-            title: updatedNote.data.title, 
-            body: updatedNote.data.body,
-            id: updatedNote.data._id
-        }
+  return (
+    <Container>
+      {sidebarIsOpen && <Sidebar />}
 
-        await getNotes(newNote)
-    }
-
-    useEffect(()=> {
-        getNotes()
-    }, [getNotes])
-
-    return (
-        <Container>
-            <Sidebar isOpen={sidebarState} getNotes={getNotes} />
-
-            <Editor classN={sidebarState ? 'active' : ''} updateNote={updateNote}/>
-        </Container>
-    )
+      <Editor updateNote={updateNote} />
+    </Container>
+  );
 }
