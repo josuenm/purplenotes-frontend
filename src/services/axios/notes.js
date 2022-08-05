@@ -36,7 +36,7 @@ export const NotesServices = {
   },
 
   delete: async (id) => {
-    await api
+    return await api
       .delete(`/${id}`, {
         headers: {
           "jsnotes.token": nookies.get()["jsnotes.token"],
