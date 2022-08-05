@@ -28,8 +28,8 @@ export const NotesContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 200:
-        setNotes(response.data);
         if (response.data.length > 0) {
+          setNotes(response.data);
           handleCurrentNote(response.data[0]);
         }
         break;
@@ -110,6 +110,13 @@ export const NotesContextProvider = ({ children }) => {
     handleLoading(false);
   }
 
+  function findById(id) {
+    const note = notes.find((n) => n._id === id);
+    if (note) {
+      handleCurrentNote(note);
+    }
+  }
+
   useEffect(() => {
     list();
   }, []);
@@ -124,6 +131,7 @@ export const NotesContextProvider = ({ children }) => {
         update,
         search,
         deleteNote,
+        findById,
       }}
     >
       {children}
