@@ -56,8 +56,21 @@ export const WarningText = styled.h4`
 `;
 
 export const ListOfNotesContainer = styled.div`
+  max-width: calc(3 * 250px + 2 * 40px);
+  width: 100%;
+  margin: 0 auto;
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 40px;
+
+  @media screen and (max-width: 991px) {
+    max-width: calc(2 * 250px + 1 * 40px);
+  }
+
+  @media screen and (max-width: 570px) {
+    flex-direction: column;
+    max-width: 100%;
+  }
 `;
 
 export const NoteCard = styled.div`
@@ -75,6 +88,10 @@ export const NoteCard = styled.div`
   &:hover {
     border: 1px solid var(--purple-100);
     color: var(--purple-100);
+  }
+
+  @media screen and (max-width: 570px) {
+    width: 100%;
   }
 `;
 
@@ -97,6 +114,7 @@ export const ButtonSet = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: 1.2rem;
 `;
 
 export const DeleteButton = styled.button`
@@ -113,6 +131,10 @@ export const DeleteButton = styled.button`
   &:hover {
     opacity: 0.7;
   }
+
+  @media screen and (max-width: 570px) {
+    padding: 0.8rem;
+  }
 `;
 export const AccessButton = styled.button`
   width: 100%;
@@ -127,5 +149,9 @@ export const AccessButton = styled.button`
   transition: ease 0.4s opacity;
   &:hover {
     opacity: 0.7;
+  }
+
+  @media screen and (max-width: 570px) {
+    padding: 0.8rem;
   }
 `;
