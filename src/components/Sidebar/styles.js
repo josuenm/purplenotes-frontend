@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.nav`
   flex-direction: column;
   align-items: center;
 
-  height: calc(100vh - 4.5rem);
+  min-height: 100vh;
   background: var(--purple-100);
   color: #fff;
   overflow: hidden;
@@ -60,49 +60,6 @@ export const Container = styled.nav`
       to {
         width: 0;
         display: none;
-      }
-    }
-  }
-
-  input[type='text'] {
-    width: 75%;
-    margin: 0 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 3rem;
-    border: none;
-
-    @media (max-width: 991.98px) {
-      width: calc(100% - 3rem);
-      padding: 0.5rem 1rem;
-    }
-  }
-
-  .sidebar__info {
-    width: max-content;
-    display: flex;
-    gap: 3rem;
-    margin: 0 0.5rem;
-    align-items: center;
-
-    .sidebar__numberOfNotes {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    button {
-      background: var(--purple-80);
-      color: #fff;
-
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-
-      border: none;
-      border-radius: 0.25rem;
-
-      transition: all 0.2s;
-      &:hover {
-        background: var(--purple-90);
       }
     }
   }
@@ -210,6 +167,56 @@ export const Container = styled.nav`
             background: var(--purple-80);
           }
         }
+      }
+    }
+  }
+`;
+
+export const SidebarHeader = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+
+  input[type="text"] {
+    width: 75%;
+    padding: 0.5rem 1rem;
+    border-radius: 3rem;
+    border: none;
+
+    @media (max-width: 991.98px) {
+      width: calc(100% - 3rem);
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  .sidebar__info {
+    width: max-content;
+    display: flex;
+    gap: 3rem;
+    margin: 0 0.5rem;
+    align-items: center;
+
+    .sidebar__numberOfNotes {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    button {
+      background: var(--purple-80);
+      color: #fff;
+
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+
+      border: none;
+      border-radius: 0.25rem;
+
+      transition: all 0.2s;
+      &:hover {
+        background: var(--purple-90);
       }
     }
   }
