@@ -38,7 +38,7 @@ export function HeaderLogged() {
         </SidebarButton>
       )}
 
-      <Link to="/notes">
+      <Link to="/dashboard">
         <img src={Logo} alt="" className="header__logo" />
       </Link>
 
