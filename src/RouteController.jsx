@@ -6,7 +6,6 @@ import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { UserEdit } from "./pages/UserEdit";
 import { NoteList } from "./pages/NoteList";
-import { HeaderLogged } from "./components/HeaderLogged";
 import { useContext, useEffect } from "react";
 import { UserContext } from "./contexts/userContext";
 
