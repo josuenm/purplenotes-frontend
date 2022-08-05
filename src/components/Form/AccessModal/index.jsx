@@ -11,11 +11,3 @@ export function AccessModal({ children }) {
     </Container>
   );
 }
-
-export function Input({ htmlFor, type, register }) {
-  return <></>;
-}
-
-export function Submit({ value, isDisabled }) {
-  return <></>;
-}
