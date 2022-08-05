@@ -92,9 +92,9 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 204:
-        localStorage.removeItem("jsnotes.token");
-        await nookies.destroy(null, "jsnotes.token");
         navigation("/");
+        localStorage.removeItem("jsnotes.user");
+        await nookies.destroy(null, "jsnotes.token");
         break;
     }
 
