@@ -67,7 +67,7 @@ export function HeaderLogged() {
         >
           <div className="header__dropDownContent">
             <Link
-              to="/users/edit"
+              to="/user/edit"
               className="header__dropDownContent__option"
               data-close
               onClick={dropDown}
