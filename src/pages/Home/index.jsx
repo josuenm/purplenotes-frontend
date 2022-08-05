@@ -1,6 +1,15 @@
-import { Container } from "./styles";
-import { Link } from "react-router-dom";
+import {
+  Container,
+  Description,
+  InfoContainer,
+  PresentationContainer,
+  PresentationImage,
+  Title,
+  ButtonContainer,
+} from "./styles";
 import { Head } from "../../components/Head";
+import { Link } from "react-router-dom";
+import { SafeZone } from "../../components/SafeZone";
 import Prestation from "../../assets/images/presentation.png";
 
 export function Home() {
@@ -8,29 +17,30 @@ export function Home() {
     <Container>
       <Head title="Home | JavaScript Notes" description="" />
 
-      <div className="home__body">
-        <div className="home__body__title">
-          <h2>
+      <SafeZone>
+        <InfoContainer>
+          <Title>
             Create notes easily and access them whenever you want in the cloud
-          </h2>
+          </Title>
 
-          <p>
+          <Description>
             Now you have a place to keep your notes! With our service you can
             save your notes for free and access them whenever and wherever you
             want! Your notes will always be available and safely stored
-          </p>
+          </Description>
 
-          <div className="home__body__titleButton">
-            <Link to="register" alt="">
-              REGISTER FOR FREE NOW
-            </Link>
-          </div>
-        </div>
+          <ButtonContainer>
+            <Link to="/register">REGISTER FOR FREE NOW</Link>
+          </ButtonContainer>
+        </InfoContainer>
 
-        <div className="home__body__presentation">
-          <img src={Prestation} alt="" />
-        </div>
-      </div>
+        <PresentationContainer>
+          <PresentationImage
+            src={Prestation}
+            alt="Apresentação da plataforma"
+          />
+        </PresentationContainer>
+      </SafeZone>
     </Container>
   );
 }
