@@ -1,12 +1,12 @@
-import { Container } from "./styles";
-import logo from "../../../assets/images/logo.png";
+import { Container, Title } from "./styles";
 import { useState } from "react";
+import logo from "../../../assets/images/logo.png";
 
 export function AccessModal({ children }) {
   return (
     <Container>
       <img src={logo} alt="" />
-      <p className="AccessModal__title">Your notes in the cloud</p>
+      <Title>Your notes in the cloud</Title>
       {children}
     </Container>
   );
