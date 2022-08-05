@@ -1,35 +1,36 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, MobileMenu, SidebarButton } from "./styles";
 import Logo from "../../assets/images/logo-white.png";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useState } from "react";
-import { UserServices } from "../../services/users";
+import { useContext, useState } from "react";
+import { UserServices } from "../../services/axios/users";
+import { UserContext } from "../../contexts/userContext";
+import { GlobalToolsContext } from "../../contexts/globalToolsContext";
 
 export function HeaderLogged() {
+  const { handleSidebar, sidebarIsOpen } = useContext(GlobalToolsContext);
+
   const [isDropDown, setIsDropDown] = useState(false);
-  const sidebarState = useSelector(selectSidebar);
-  const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
+  const { pathname } = useLocation();
 
   function dropDown({ target }) {
     if (target.dataset.close) setIsDropDown(!isDropDown);
   }
 
-  function isCloseSidebar() {
-    sidebarState ? dispatch(closeSidebar()) : dispatch(openSidebar());
+  function handleSidebarButton() {
+    handleSidebar(!sidebarIsOpen);
   }
 
-  function loggoutUser() {
-    UserServices.loggout();
-    dispatch(loggout);
-    navigate("/login", { replace: true });
-  }
+  function loggoutUser() {}
 
   return (
     <Container>
-      {window.location.pathname !== "/users/edit" && (
+      {pathname !== "/users/edit" && (
         <SidebarButton
-          onClick={isCloseSidebar}
-          className={sidebarState ? "active" : ""}
+          onClick={handleSidebarButton}
+          className={sidebarIsOpen ? "active" : ""}
         >
           <div className="stick firstStick"></div>
           <div className="stick secondStick"></div>
