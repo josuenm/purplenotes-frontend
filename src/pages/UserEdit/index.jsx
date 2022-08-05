@@ -35,7 +35,7 @@ const passwordSchema = yup
   .required();
 
 const BasicInfoBox = () => {
-  const { user } = useContext(UserContext);
+  const { user, UpdateBasicInfo } = useContext(UserContext);
 
   const {
     register,
@@ -51,7 +51,9 @@ const BasicInfoBox = () => {
     }),
     resolver: yupResolver(basicInfoSchema),
   });
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    UpdateBasicInfo(data);
+  };
 
   return (
     <Box>
