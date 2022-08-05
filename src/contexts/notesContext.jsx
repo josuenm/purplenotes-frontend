@@ -8,31 +8,63 @@ export const NotesContext = createContext(null);
 
 export const NotesContextProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
-
-  // const firstData = {
-  //   title: response.data[0].title,
-  //   body: response.data[0].body,
-  //   id: response.data[0]._id,
-  // };
+  const [currentNote, setCurrentNote] = useState(null);
 
   const { handleLoading } = useContext(GlobalToolsContext);
 
   const navigation = useNavigate();
 
-  async function list(data) {
+  function handleCurrentNote(data) {
+    setCurrentNote({
+      body: data.body,
+      title: data.title,
+      id: data._id,
+    });
+  }
+
+  async function list() {
     handleLoading(true);
     const response = await NotesServices.allNotes();
 
     switch (response.status) {
       case 200:
         setNotes(response.data);
+        handleCurrentNote(response.data[0]);
+        break;
+
+      default:
         break;
     }
 
     handleLoading(false);
   }
 
+  async function create() {
+    handleLoading(true);
+
+    const response = await NotesServices.create();
+
+    switch (response.status) {
+      case 201:
+        list();
+        handleCurrentNote(response.data);
+        break;
+
+      default:
+        break;
+    }
+    handleLoading(false);
+  }
+
+  useEffect(() => {
+    list();
+  }, []);
+
   return (
-    <NotesContext.Provider value={{ notes }}>{children}</NotesContext.Provider>
+    <NotesContext.Provider
+      value={{ notes, currentNote, handleCurrentNote, create }}
+    >
+      {children}
+    </NotesContext.Provider>
   );
 };
