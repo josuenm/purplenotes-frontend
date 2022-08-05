@@ -1,5 +1,4 @@
 import { Container } from "./styles";
-import { Sidebar } from "../../components/Sidebar";
 import { SafeZone } from "../../components/SafeZone";
 import { NotesServices } from "../../services/axios/notes";
 import { Editor } from "../../components/Editor";
