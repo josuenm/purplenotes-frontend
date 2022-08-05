@@ -8,11 +8,11 @@ import { Submit } from "../../components/Form/Submit";
 import { Set } from "../../components/Form/Set";
 import { Label } from "../../components/Form/Label";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { ErrorMessage } from "../../components/Form/ErrorMessage";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const schema = yup
@@ -79,7 +79,7 @@ export function Register() {
           </Set>
 
           <Set>
-            <Submit value="Register" />
+            <Submit title="Register" />
             <OtherOption>
               Already have an account? <Link to="/login">Login</Link>
             </OtherOption>

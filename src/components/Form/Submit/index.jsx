@@ -1,5 +1,5 @@
 import { Container } from "./styles";
 
-export function Submit({ value, isDisabled }) {
-  return <Container type="submit" value={value} data-disabled={isDisabled} />;
+export function Submit({ title, isDisabled }) {
+  return <Container type="submit" value={title} data-disabled={isDisabled} />;
 }

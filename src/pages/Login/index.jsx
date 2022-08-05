@@ -67,7 +67,7 @@ export function Login() {
           </Set>
 
           <Set>
-            <Submit value="Login" isDisabled={false} />
+            <Submit title="Login" isDisabled={false} />
           </Set>
           <OtherOption>
             Doesn't have an account? <Link to="/register">Register</Link>
