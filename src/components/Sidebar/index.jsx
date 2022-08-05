@@ -7,30 +7,30 @@ import { NotesContext } from "../../contexts/notesContext";
 import { GlobalToolsContext } from "../../contexts/globalToolsContext";
 
 export function Sidebar() {
-  const [search, setSearch] = useState("");
+  const [searchState, setSearchState] = useState("");
 
-  const { notes, currentNote, handleCurrentNote, create } =
-    useContext(NotesContext);
+  const { 
+    notes, 
+    currentNote, 
+    handleCurrentNote, 
+    create, 
+    search, 
+    delete 
+  } = useContext(NotesContext);
+
   const { sidebarIsOpen, handleSidebar } = useContext(GlobalToolsContext);
-
-  const deleteNote = async (id) => {
-    await NotesServices.deleteNote(id);
-    getNotes();
-  };
 
   const searchNote = async (e) => {
     if (e.key === "Enter") {
-      const response = await NotesServices.search(search);
-      dispatch(updateNotes(response.data));
+      search(searchState);
     }
   };
 
   const formatTitle = (title) => {
     if (title.length >= 20) {
       return title.substring(0, 20) + "...";
-    } else {
-      return title;
     }
+    return title;
   };
 
   const formatBody = (body) => {
@@ -38,9 +38,8 @@ export function Sidebar() {
 
     if (newBody.length >= 20) {
       return newBody.substring(0, 20) + "...";
-    } else {
-      return newBody;
     }
+    return newBody;
   };
 
   return (
@@ -48,9 +47,9 @@ export function Sidebar() {
       <SidebarHeader>
         <input
           type="text"
-          value={search}
+          value={searchState}
           placeholder="Search"
-          onChange={({ target }) => setSearch(target.value)}
+          onChange={({ target }) => setSearchState(target.value)}
           onKeyPress={searchNote}
         />
 
@@ -77,10 +76,7 @@ export function Sidebar() {
               <span className="sidebar__noteDate">
                 {Moment(note.created_at).format("DD/MM")}
               </span>
-              <DeleteIcon
-                className="sidebar__deleteIcon"
-                onClick={() => deleteNote(note._id)}
-              />
+              <DeleteIcon className="sidebar__deleteIcon" />
             </div>
           </li>
         ))}
