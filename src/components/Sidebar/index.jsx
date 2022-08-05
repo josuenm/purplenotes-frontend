@@ -9,14 +9,8 @@ import { GlobalToolsContext } from "../../contexts/globalToolsContext";
 export function Sidebar() {
   const [searchState, setSearchState] = useState("");
 
-  const { 
-    notes, 
-    currentNote, 
-    handleCurrentNote, 
-    create, 
-    search, 
-    delete 
-  } = useContext(NotesContext);
+  const { notes, currentNote, handleCurrentNote, create, search, deleteNote } =
+    useContext(NotesContext);
 
   const { sidebarIsOpen, handleSidebar } = useContext(GlobalToolsContext);
 
@@ -76,7 +70,10 @@ export function Sidebar() {
               <span className="sidebar__noteDate">
                 {Moment(note.created_at).format("DD/MM")}
               </span>
-              <DeleteIcon className="sidebar__deleteIcon" />
+              <DeleteIcon
+                className="sidebar__deleteIcon"
+                onClick={() => deleteNote(note._id)}
+              />
             </div>
           </li>
         ))}
