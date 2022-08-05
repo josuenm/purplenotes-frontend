@@ -29,7 +29,9 @@ export const NotesContextProvider = ({ children }) => {
     switch (response.status) {
       case 200:
         setNotes(response.data);
-        handleCurrentNote(response.data[0]);
+        if (response.data.length > 0) {
+          handleCurrentNote(response.data[0]);
+        }
         break;
 
       default:
@@ -91,12 +93,11 @@ export const NotesContextProvider = ({ children }) => {
     }
   }
 
-
-  async function delete(id) {
+  async function deleteNote(id) {
     handleLoading(true);
 
     const response = await NotesServices.delete(id);
-
+    console.log(response);
     switch (response.status) {
       case 204:
         list();
@@ -115,14 +116,14 @@ export const NotesContextProvider = ({ children }) => {
 
   return (
     <NotesContext.Provider
-      value={{ 
-        notes, 
-        currentNote, 
-        handleCurrentNote, 
-        create, 
-        update, 
-        search, 
-        delete 
+      value={{
+        notes,
+        currentNote,
+        handleCurrentNote,
+        create,
+        update,
+        search,
+        deleteNote,
       }}
     >
       {children}
