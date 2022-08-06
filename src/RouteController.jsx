@@ -1,7 +1,6 @@
 import { useNavigate, Route, Routes, useLocation } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { EditNote } from "./pages/EditNote";
-import { Header } from "./components/Header";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { UserEdit } from "./pages/UserEdit";
