@@ -1,3 +1,5 @@
+import * as yup from "yup";
+import Head from "../../components/Head";
 import { useContext, useMemo, useState } from "react";
 import { Set } from "../../components/Form/Set";
 import { Input } from "../../components/Form/Inputs";
@@ -5,7 +7,9 @@ import { Label } from "../../components/Form/Label";
 import { Submit } from "../../components/Form/Submit";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { ErrorMessage } from "../../components/Form/ErrorMessage";
+import { UserContext } from "../../contexts/userContext";
+import { GoBackHeader } from "../../components/GoBackHeader";
 import {
   Container,
   SimpleBox,
@@ -14,9 +18,6 @@ import {
   DeleteButton,
   Title,
 } from "./styles";
-import { ErrorMessage } from "../../components/Form/ErrorMessage";
-import { UserContext } from "../../contexts/userContext";
-import { GoBackHeader } from "../../components/GoBackHeader";
 
 const basicInfoSchema = yup
   .object({
@@ -58,6 +59,7 @@ const BasicInfoBox = () => {
 
   return (
     <Box>
+      <Head title="User edit | Purple Notes" description="" />
       <Title>Personal Information</Title>
       <SimpleBox onSubmit={handleSubmit(onSubmit)}>
         <Set>

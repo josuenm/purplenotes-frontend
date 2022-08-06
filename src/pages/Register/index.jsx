@@ -1,6 +1,6 @@
 import { Container, OtherOption } from "./styles";
 import { Link } from "react-router-dom";
-import { Head } from "../../components/Head";
+import Head from "../../components/Head";
 
 import { AccessModal } from "../../components/Form/AccessModal";
 import { Input } from "../../components/Form/Inputs";
@@ -39,7 +39,7 @@ export function Register() {
 
   return (
     <Container>
-      <Head title="Register | JavaScript Notes" description="" />
+      <Head title="Register | Purple Notes" description="" />
 
       <AccessModal>
         <form onSubmit={handleSubmit(onSubmit)}>

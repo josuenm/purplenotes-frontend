@@ -1,3 +1,8 @@
+import LogoImage from "../../assets/images/logo.png";
+import Prestation from "../../assets/images/presentation.png";
+import Head from "../../components/Head";
+import { Link } from "react-router-dom";
+import { SafeZone } from "../../components/SafeZone";
 import {
   Container,
   Description,
@@ -10,16 +15,14 @@ import {
   LoginButton,
   Logo,
 } from "./styles";
-import { Head } from "../../components/Head";
-import { Link } from "react-router-dom";
-import { SafeZone } from "../../components/SafeZone";
-import LogoImage from "../../assets/images/logo.png";
-import Prestation from "../../assets/images/presentation.png";
 
 export function Home() {
   return (
     <Container>
-      <Head title="Home | JavaScript Notes" description="" />
+      <Head
+        title="Home | Purple Notes"
+        description="Now you have a place to keep your notes! With our service you can save your notes for free and access them whenever and wherever you want! Your notes will always be available and safely stored"
+      />
 
       <Header>
         <SafeZone>

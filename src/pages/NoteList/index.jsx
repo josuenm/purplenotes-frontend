@@ -1,9 +1,10 @@
+import Moment from "moment";
+import Head from "../../components/Head";
 import { SafeZone } from "../../components/SafeZone";
 import { useContext, useEffect } from "react";
 import { NotesContext } from "../../contexts/notesContext";
 import { Link } from "react-router-dom";
 import { DashboardHeader } from "../../components/DashboardHeader";
-import Moment from "moment";
 import {
   AccessButton,
   ButtonSet,
@@ -78,6 +79,7 @@ export const NoteList = () => {
 
   return (
     <Container>
+      <Head title="Dashboard | JavaScript Notes" description="" />
       <Presentation>
         <SafeZone>
           <DashboardHeader />

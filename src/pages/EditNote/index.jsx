@@ -1,3 +1,4 @@
+import Head from "../../components/Head";
 import { Container, WarningText } from "./styles";
 import { SafeZone } from "../../components/SafeZone";
 import { NotesServices } from "../../services/axios/notes";
@@ -16,16 +17,13 @@ export function EditNote() {
   };
 
   return (
-    <>
+    <Container>
       <GoBackHeader to="/dashboard" />
+      <WarningText>The note is automatically saved</WarningText>
 
-      <Container>
-        <WarningText>The note is automatically saved</WarningText>
-
-        <SafeZone>
-          <Editor updateNote={updateNote} />
-        </SafeZone>
-      </Container>
-    </>
+      <SafeZone>
+        <Editor updateNote={updateNote} />
+      </SafeZone>
+    </Container>
   );
 }

@@ -1,6 +1,7 @@
+import * as yup from "yup";
+import Head from "../../components/Head";
 import { Link } from "react-router-dom";
 import { Container, OtherOption } from "./styles";
-import { Head } from "../../components/Head";
 
 import { AccessModal } from "../../components/Form/AccessModal";
 import { Input } from "../../components/Form/Inputs";
@@ -13,7 +14,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/userContext";
-import * as yup from "yup";
 
 const schema = yup
   .object({
@@ -38,7 +38,7 @@ export function Login() {
 
   return (
     <Container>
-      <Head title="Login | JavaScript Notes" description="" />
+      <Head title="Login | Purple Notes" description="" />
 
       <AccessModal>
         <form onSubmit={handleSubmit(onSubmit)}>
