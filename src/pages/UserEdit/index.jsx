@@ -16,6 +16,7 @@ import {
 } from "./styles";
 import { ErrorMessage } from "../../components/Form/ErrorMessage";
 import { UserContext } from "../../contexts/userContext";
+import { GoBackHeader } from "../../components/GoBackHeader";
 
 const basicInfoSchema = yup
   .object({
@@ -150,10 +151,14 @@ const DeleteButtonBox = () => {
 
 export function UserEdit() {
   return (
-    <Container>
-      <BasicInfoBox />
-      <PasswordBox />
-      <DeleteButtonBox />
-    </Container>
+    <>
+      <GoBackHeader to="/dashboard" />
+
+      <Container>
+        <BasicInfoBox />
+        <PasswordBox />
+        <DeleteButtonBox />
+      </Container>
+    </>
   );
 }
