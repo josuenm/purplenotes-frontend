@@ -101,6 +101,12 @@ export const UserContextProvider = ({ children }) => {
     handleLoading(false);
   }
 
+  async function Exit() {
+    navigation("/");
+    localStorage.removeItem("jsnotes.user");
+    await nookies.destroy(null, "jsnotes.token");
+  }
+
   useEffect(() => {
     const userLocalStorage = JSON.parse(localStorage.getItem("jsnotes.user"));
     setUser(userLocalStorage);
@@ -115,6 +121,7 @@ export const UserContextProvider = ({ children }) => {
         UpdateBasicInfo,
         UpdatePassword,
         DeleteAccount,
+        Exit,
       }}
     >
       {children}
