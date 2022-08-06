@@ -1,14 +1,13 @@
 import { createContext, useState } from "react";
 import { LoadingScreen } from "../components/LoadingScreen";
 import { PopUpError } from "../components/PopUpError";
-import { motion, AnimatePresence } from "framer-motion";
 
 export const GlobalToolsContext = createContext(null);
 
 export const GlobalToolsContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   function handleLoading(value) {
     setIsLoading(value);
@@ -18,22 +17,20 @@ export const GlobalToolsContextProvider = ({ children }) => {
     setSidebarIsOpen(value);
   }
 
+  function handleError(message) {
+    setError(message);
+
+    setTimeout(() => {
+      setError(null);
+    }, 6000);
+  }
+
   return (
     <GlobalToolsContext.Provider
-      value={{ handleLoading, sidebarIsOpen, handleSidebar }}
+      value={{ handleLoading, sidebarIsOpen, handleSidebar, handleError }}
     >
-      {isLoading && (
-        <AnimatePresence>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <LoadingScreen />
-          </motion.div>
-        </AnimatePresence>
-      )}
+      <LoadingScreen toggle={isLoading} />
+      <PopUpError error={error} />
       {children}
     </GlobalToolsContext.Provider>
   );
