@@ -1,10 +1,21 @@
 import { Background, Spinner } from "./styles";
+import { motion, AnimatePresence } from "framer-motion";
 
-const LoadingScreen = () => {
+const LoadingScreen = ({ toggle }) => {
   return (
-    <Background>
-      <Spinner />
-    </Background>
+    <AnimatePresence>
+      <motion.div
+        key={toggle}
+        initial={{ opacity: 0 }}
+        animate={toggle ? { opacity: 1 } : { opacity: 0, display: "none" }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <Background>
+          <Spinner />
+        </Background>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
