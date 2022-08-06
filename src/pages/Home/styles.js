@@ -5,8 +5,7 @@ export const Container = styled.div`
   min-height: 100vh;
 
   .Container {
-    min-height: 100vh;
-
+    padding-top: 8rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
