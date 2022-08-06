@@ -28,30 +28,30 @@ export const DashboardHeader = () => {
           {user ? user.name.substring(0, 9) + "" : ""}
           <DropDown src="/drop-down.svg" alt="Drop down" />
         </UserButton>
-        {isDropDownActive && (
-          <>
+
+        <AnimatePresence>
+          <motion.div
+            key={isDropDownActive}
+            initial={{ opacity: 0 }}
+            animate={
+              isDropDownActive
+                ? { opacity: 1 }
+                : { opacity: 0, display: "none" }
+            }
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+          >
             <DropDownBackground
               onClick={() => setIsDropDownActive(!isDropDownActive)}
             />
-            <AnimatePresence>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-              >
-                <DropDownContainer>
-                  <DropDownItem
-                    onClick={() => navigation("/dashboard/user/edit")}
-                  >
-                    User edit
-                  </DropDownItem>
-                  <DropDownItem onClick={() => Exit()}>Exit</DropDownItem>
-                </DropDownContainer>
-              </motion.div>
-            </AnimatePresence>
-          </>
-        )}
+            <DropDownContainer>
+              <DropDownItem onClick={() => navigation("/dashboard/user/edit")}>
+                User edit
+              </DropDownItem>
+              <DropDownItem onClick={() => Exit()}>Exit</DropDownItem>
+            </DropDownContainer>
+          </motion.div>
+        </AnimatePresence>
       </UserButtonContainer>
     </Container>
   );
