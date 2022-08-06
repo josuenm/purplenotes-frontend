@@ -1,3 +1,9 @@
+import { SafeZone } from "../../components/SafeZone";
+import { useContext } from "react";
+import { NotesContext } from "../../contexts/notesContext";
+import { Link } from "react-router-dom";
+import { DashboardHeader } from "../../components/DashboardHeader";
+import Moment from "moment";
 import {
   AccessButton,
   ButtonSet,
@@ -16,11 +22,6 @@ import {
   WarningContainer,
   WarningText,
 } from "./styles";
-import { SafeZone } from "../../components/SafeZone";
-import { useContext } from "react";
-import { NotesContext } from "../../contexts/notesContext";
-import { Link } from "react-router-dom";
-import Moment from "moment";
 
 export const Warning = ({ title }) => {
   return (
@@ -75,22 +76,19 @@ export const NoteList = () => {
     <Container>
       <Presentation>
         <SafeZone>
+          <DashboardHeader />
           <CreateNoteButton onClick={create}>Create Note</CreateNoteButton>
         </SafeZone>
       </Presentation>
+
       <SafeZone>
         <ListContainer>
           <ListTitle>Note list</ListTitle>
           <ListOfNotesContainer>
-            {/* {notes.length > 0 ? (
-              notes.map((note) => <Card data={note} key={note._id} />)
-            ) : (
-              <Warning title="Nothing to list" />
-            )} */}
             {notes.length > 0 ? (
               notes.map((note) => <Card note={note} key={note._id} />)
             ) : (
-              <></>
+              <Warning title="Nothing to list" />
             )}
           </ListOfNotesContainer>
         </ListContainer>
