@@ -8,7 +8,7 @@ export const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const { handleLoading } = useContext(GlobalToolsContext);
+  const { handleLoading, handleError } = useContext(GlobalToolsContext);
 
   const navigation = useNavigate();
 
@@ -30,6 +30,10 @@ export const UserContextProvider = ({ children }) => {
         });
         navigation("/dashboard");
         break;
+
+      default:
+        handleError("Something wrong, try again");
+        break;
     }
 
     handleLoading(false);
@@ -47,6 +51,10 @@ export const UserContextProvider = ({ children }) => {
           email: response.data.user.email,
         });
         navigation("/dashboard");
+        break;
+
+      default:
+        handleError("Something wrong, try again");
         break;
     }
 
@@ -67,6 +75,10 @@ export const UserContextProvider = ({ children }) => {
           email: response.data.email,
         });
         break;
+
+      default:
+        handleError("Something wrong, try again");
+        break;
     }
 
     handleLoading(false);
@@ -80,6 +92,10 @@ export const UserContextProvider = ({ children }) => {
       case 200:
         handleLoading(false);
         return true;
+        break;
+
+      default:
+        handleError("Something wrong, try again");
         break;
     }
 
@@ -95,6 +111,10 @@ export const UserContextProvider = ({ children }) => {
         navigation("/");
         localStorage.removeItem("jsnotes.user");
         await nookies.destroy(null, "jsnotes.token");
+        break;
+
+      default:
+        handleError("Something wrong, try again");
         break;
     }
 
