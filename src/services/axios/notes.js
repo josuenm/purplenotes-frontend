@@ -2,7 +2,7 @@ import axios from "axios";
 import nookies from "nookies";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/notes",
+  baseURL: `${import.meta.env.VITE_API_URL}/notes`,
 });
 
 export const NotesServices = {
