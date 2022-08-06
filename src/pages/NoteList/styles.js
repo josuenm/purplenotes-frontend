@@ -7,12 +7,12 @@ export const Container = styled.div`
 
 export const Presentation = styled.div`
   background-color: var(--purple-100);
-  padding: 3rem 0;
+  padding: 1rem 0 3rem;
 
   .Container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 4rem;
     text-align: center;
   }
 `;
@@ -77,7 +77,8 @@ export const NoteCard = styled.div`
   border-radius: 0.25rem;
   padding: 1rem;
   width: 250px;
-  border: 1px solid #000;
+  border: 1px solid #151515;
+  color: #151515;
   cursor: pointer;
 
   display: flex;
