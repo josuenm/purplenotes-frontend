@@ -1,5 +1,5 @@
 import { SafeZone } from "../../components/SafeZone";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NotesContext } from "../../contexts/notesContext";
 import { Link } from "react-router-dom";
 import { DashboardHeader } from "../../components/DashboardHeader";
@@ -70,7 +70,11 @@ export const Card = ({ note }) => {
 };
 
 export const NoteList = () => {
-  const { notes, create } = useContext(NotesContext);
+  const { notes, create, list } = useContext(NotesContext);
+
+  useEffect(() => {
+    list();
+  }, []);
 
   return (
     <Container>
