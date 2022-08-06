@@ -18,13 +18,7 @@ export const Container = styled.div`
   .editor {
     position: relative;
     width: 100%;
-    height: calc(100vh - 7rem);
+    height: 50vh;
     margin: 0 auto;
-    margin-top: 4.1rem;
-
-    @media (max-width: 575.98px) {
-      margin-top: 3.5rem;
-      height: calc(100vh - 7.6rem);
-    }
   }
 `;
