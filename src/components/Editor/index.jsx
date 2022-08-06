@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import ReactQuill from "react-quill";
-import { useDispatch, useSelector } from "react-redux";
 import { NotesContext } from "../../contexts/notesContext";
 import { Container } from "./styles";
 import { useLocation } from "react-router-dom";
