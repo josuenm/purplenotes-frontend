@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  background: var(--purple-100);
   min-height: 100vh;
 
   .Container {
@@ -22,11 +21,49 @@ export const Container = styled.div`
   }
 `;
 
+export const Header = styled.header`
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+
+  .Container {
+    min-height: 0;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 991.98px) {
+      flex-direction: row;
+      padding: 1rem;
+    }
+  }
+`;
+
+export const Logo = styled.img`
+  height: 35px;
+`;
+
+export const LoginButton = styled.button`
+  background-color: transparent;
+  border: 1px solid var(--purple-100);
+  color: var(--purple-100);
+  padding: 0.5rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 0.25rem;
+
+  transition: ease 0.4s background-color, color;
+  &:hover {
+    background-color: var(--purple-100);
+    color: #fff;
+  }
+`;
+
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  color: #fff;
+  color: #000;
 `;
 
 export const ButtonContainer = styled.div`
@@ -37,12 +74,13 @@ export const ButtonContainer = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
     border-radius: 0.25rem;
-    border: 1px solid #fff;
+    border: 1px solid var(--purple-100);
+    color: var(--purple-100);
 
     transition: all 0.2s;
     &:hover {
-      background: #fff;
-      color: var(--purple-100);
+      background: var(--purple-100);
+      color: #fff;
     }
   }
 `;

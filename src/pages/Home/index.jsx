@@ -6,16 +6,29 @@ import {
   PresentationImage,
   Title,
   ButtonContainer,
+  Header,
+  LoginButton,
+  Logo,
 } from "./styles";
 import { Head } from "../../components/Head";
 import { Link } from "react-router-dom";
 import { SafeZone } from "../../components/SafeZone";
+import LogoImage from "../../assets/images/logo.png";
 import Prestation from "../../assets/images/presentation.png";
 
 export function Home() {
   return (
     <Container>
       <Head title="Home | JavaScript Notes" description="" />
+
+      <Header>
+        <SafeZone>
+          <Logo src={LogoImage} alt="Logo" />
+          <Link to="/login">
+            <LoginButton>Login</LoginButton>
+          </Link>
+        </SafeZone>
+      </Header>
 
       <SafeZone>
         <InfoContainer>
