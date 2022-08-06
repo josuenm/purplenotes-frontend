@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { GlobalToolsContext } from "./globalToolsContext";
+import { UserContext } from "./userContext";
 import { NotesServices } from "../services/axios/notes";
 import { useNavigate } from "react-router-dom";
 import nookies from "nookies";
@@ -10,7 +11,8 @@ export const NotesContextProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null);
 
-  const { handleLoading } = useContext(GlobalToolsContext);
+  const { handleLoading, handleError } = useContext(GlobalToolsContext);
+  const { Exit } = useContext(UserContext);
 
   const navigation = useNavigate();
 
@@ -34,7 +36,12 @@ export const NotesContextProvider = ({ children }) => {
         }
         break;
 
+      case 401:
+        Exit();
+        break;
+
       default:
+        handleError("Something wrong, try again");
         break;
     }
 
@@ -52,7 +59,12 @@ export const NotesContextProvider = ({ children }) => {
         handleCurrentNote(response.data);
         break;
 
+      case 401:
+        Exit();
+        break;
+
       default:
+        handleError("Something wrong, try again");
         break;
     }
     handleLoading(false);
@@ -69,7 +81,12 @@ export const NotesContextProvider = ({ children }) => {
         handleCurrentNote(response.data);
         break;
 
+      case 401:
+        Exit();
+        break;
+
       default:
+        handleError("Something wrong, try again");
         break;
     }
 
@@ -88,7 +105,12 @@ export const NotesContextProvider = ({ children }) => {
         setNotes(response.data);
         break;
 
+      case 401:
+        Exit();
+        break;
+
       default:
+        handleError("Something wrong, try again");
         break;
     }
   }
@@ -103,7 +125,12 @@ export const NotesContextProvider = ({ children }) => {
         list();
         break;
 
+      case 401:
+        Exit();
+        break;
+
       default:
+        handleError("Something wrong, try again");
         break;
     }
 
@@ -117,10 +144,6 @@ export const NotesContextProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    list();
-  }, []);
-
   return (
     <NotesContext.Provider
       value={{
@@ -132,6 +155,7 @@ export const NotesContextProvider = ({ children }) => {
         search,
         deleteNote,
         findById,
+        list,
       }}
     >
       {children}
