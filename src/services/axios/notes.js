@@ -8,11 +8,11 @@ const api = axios.create({
 });
 
 export const NotesServices = {
-  allNotes: async ({ token }) => {
+  allNotes: async () => {
     return await api
       .get("/", {
         headers: {
-          "purplenotes.token": token,
+          "purplenotes.token": parseCookies()["purplenotes.token"],
         },
       })
       .then((data) => data)
