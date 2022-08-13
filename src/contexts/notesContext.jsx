@@ -27,12 +27,9 @@ export const NotesContextProvider = ({ children }) => {
   async function list() {
     handleLoading(true);
 
-    if (!parseCookies()["purplenotes.token"]) {
-      handleLoading(false);
-      return;
-    }
-    console.log(parseCookies()["purplenotes.token"]);
-    const response = await NotesServices.allNotes();
+    const token = parseCookies()["purplenotes.token"];
+
+    const response = await NotesServices.allNotes({ token });
     switch (response.status) {
       case 200:
         if (response.data.length > 0) {
