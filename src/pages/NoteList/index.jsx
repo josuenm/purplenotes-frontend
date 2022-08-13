@@ -1,5 +1,6 @@
 import Moment from "moment";
 import Head from "../../components/Head";
+import nookies from "nookies";
 import { SafeZone } from "../../components/SafeZone";
 import { useContext, useEffect } from "react";
 import { NotesContext } from "../../contexts/notesContext";
@@ -74,8 +75,10 @@ export const NoteList = () => {
   const { notes, create, list } = useContext(NotesContext);
 
   useEffect(() => {
-    list();
-  }, []);
+    if (nookies.get()["purplenotes.token"]) {
+      list();
+    }
+  }, [nookies.get()["purplenotes.token"]]);
 
   return (
     <Container>
