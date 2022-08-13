@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 200:
-        nookies.set(null, "purplenotes.token", response.data.token);
+        await nookies.set(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
@@ -45,7 +45,7 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 201:
-        nookies.set(null, "purplenotes.token", response.data.token);
+        await nookies.set(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
