@@ -28,9 +28,7 @@ export const UserContextProvider = ({ children }) => {
           name: response.data.user.name,
           email: response.data.user.email,
         });
-        if(nookies.get()["purplenotes.token"]) {
-          navigation("/dashboard");
-        }
+        navigation("/dashboard");
         break;
 
       case 401:
@@ -55,17 +53,15 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 201:
-        nookies.set(null, "purplenotes.token", response.data.token);
+        await nookies.set(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
         });
-        if(nookies.get()["purplenotes.token"]) {
-          navigation("/dashboard");
-        }
+        navigation("/dashboard");
         break;
 
-      409:
+      case 409:
         handleError("User already exists");
         break;
 
