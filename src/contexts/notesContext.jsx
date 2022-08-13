@@ -31,7 +31,7 @@ export const NotesContextProvider = ({ children }) => {
       handleLoading(false);
       return;
     }
-
+    console.log(parseCookies()["purplenotes.token"]);
     const response = await NotesServices.allNotes();
     switch (response.status) {
       case 200:
