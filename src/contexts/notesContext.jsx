@@ -33,6 +33,8 @@ export const NotesContextProvider = ({ children }) => {
         if (response.data.length > 0) {
           setNotes(response.data);
           handleCurrentNote(response.data[0]);
+        } else {
+          setNotes([]);
         }
         break;
 
@@ -119,7 +121,6 @@ export const NotesContextProvider = ({ children }) => {
     handleLoading(true);
 
     const response = await NotesServices.delete(id);
-    console.log(response);
     switch (response.status) {
       case 204:
         list();
