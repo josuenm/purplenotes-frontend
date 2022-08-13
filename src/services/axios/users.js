@@ -25,7 +25,7 @@ export const UserServices = {
   updateBasicInfo: async (params) => {
     return await api
       .put("/", params, {
-        headers: { "jsnotes.token": nookies.get()["jsnotes.token"] },
+        headers: { "purplenotes.token": nookies.get()["purplenotes.token"] },
       })
       .then((data) => data)
       .catch((error) => error.response);
@@ -34,7 +34,7 @@ export const UserServices = {
   updatePassword: async (params) => {
     return await api
       .put("/password", params, {
-        headers: { "jsnotes.token": nookies.get()["jsnotes.token"] },
+        headers: { "purplenotes.token": nookies.get()["purplenotes.token"] },
       })
       .then((data) => data)
       .catch((error) => error.response);
@@ -43,7 +43,7 @@ export const UserServices = {
   deleteAccount: async () => {
     return await api
       .delete("/delete", {
-        headers: { "jsnotes.token": nookies.get()["jsnotes.token"] },
+        headers: { "purplenotes.token": nookies.get()["purplenotes.token"] },
       })
       .then((data) => data)
       .catch((error) => error.response);

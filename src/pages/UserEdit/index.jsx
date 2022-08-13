@@ -45,7 +45,7 @@ const BasicInfoBox = () => {
     formState: { errors },
   } = useForm({
     defaultValues: useMemo(() => {
-      const localUser = JSON.parse(localStorage.getItem("jsnotes.user"));
+      const localUser = JSON.parse(localStorage.getItem("purplenotes.user"));
       return {
         name: localUser.name,
         email: localUser.email,

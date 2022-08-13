@@ -13,7 +13,7 @@ export const UserContextProvider = ({ children }) => {
   const navigation = useNavigate();
 
   function handleUser({ name, email }) {
-    localStorage.setItem("jsnotes.user", JSON.stringify({ name, email }));
+    localStorage.setItem("purplenotes.user", JSON.stringify({ name, email }));
     setUser({ name, email });
   }
 
@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 200:
-        nookies.set(null, "jsnotes.token", response.data.token);
+        nookies.set(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
@@ -45,7 +45,7 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 201:
-        nookies.set(null, "jsnotes.token", response.data.token);
+        nookies.set(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
@@ -109,8 +109,8 @@ export const UserContextProvider = ({ children }) => {
     switch (response.status) {
       case 204:
         navigation("/");
-        localStorage.removeItem("jsnotes.user");
-        await nookies.destroy(null, "jsnotes.token");
+        localStorage.removeItem("purplenotes.user");
+        await nookies.destroy(null, "purplenotes.token");
         break;
 
       default:
@@ -123,12 +123,14 @@ export const UserContextProvider = ({ children }) => {
 
   async function Exit() {
     navigation("/");
-    localStorage.removeItem("jsnotes.user");
-    await nookies.destroy(null, "jsnotes.token");
+    localStorage.removeItem("purplenotes.user");
+    await nookies.destroy(null, "purplenotes.token");
   }
 
   useEffect(() => {
-    const userLocalStorage = JSON.parse(localStorage.getItem("jsnotes.user"));
+    const userLocalStorage = JSON.parse(
+      localStorage.getItem("purplenotes.user")
+    );
     setUser(userLocalStorage);
   }, []);
 

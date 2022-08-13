@@ -12,7 +12,7 @@ export const NotesServices = {
     return await api
       .get("/", {
         headers: {
-          "jsnotes.token": nookies.get()["jsnotes.token"],
+          "purplenotes.token": nookies.get()["purplenotes.token"],
         },
       })
       .then((data) => data)
@@ -29,7 +29,7 @@ export const NotesServices = {
         },
         {
           headers: {
-            "jsnotes.token": nookies.get()["jsnotes.token"],
+            "purplenotes.token": nookies.get()["purplenotes.token"],
           },
         }
       )
@@ -41,7 +41,7 @@ export const NotesServices = {
     return await api
       .delete(`/${id}`, {
         headers: {
-          "jsnotes.token": nookies.get()["jsnotes.token"],
+          "purplenotes.token": nookies.get()["purplenotes.token"],
         },
       })
       .then((data) => data)
@@ -52,7 +52,7 @@ export const NotesServices = {
     return await api
       .put(`/${id}`, params, {
         headers: {
-          "jsnotes.token": nookies.get()["jsnotes.token"],
+          "purplenotes.token": nookies.get()["purplenotes.token"],
         },
       })
       .then((data) => data)
@@ -63,7 +63,7 @@ export const NotesServices = {
     return await api
       .get(`/search?query=${query}`, {
         headers: {
-          "jsnotes.token": nookies.get()["jsnotes.token"],
+          "purplenotes.token": nookies.get()["purplenotes.token"],
         },
       })
       .then((data) => data)
