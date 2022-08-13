@@ -3,6 +3,7 @@ import { GlobalToolsContext } from "./globalToolsContext";
 import { UserContext } from "./userContext";
 import { NotesServices } from "../services/axios/notes";
 import { useNavigate } from "react-router-dom";
+import { parseCookies } from "nookies";
 
 export const NotesContext = createContext(null);
 
@@ -25,6 +26,12 @@ export const NotesContextProvider = ({ children }) => {
 
   async function list() {
     handleLoading(true);
+
+    if (!parseCookies()["purplenotes.token"]) {
+      handleLoading(false);
+      return;
+    }
+
     const response = await NotesServices.allNotes();
     switch (response.status) {
       case 200:
