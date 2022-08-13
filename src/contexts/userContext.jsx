@@ -31,6 +31,14 @@ export const UserContextProvider = ({ children }) => {
         navigation("/dashboard");
         break;
 
+      case 401:
+        handleError("Incorrect email or password");
+        break;
+
+      case 404:
+        handleError("User not found");
+        break;
+
       default:
         handleError("Something wrong, try again");
         break;
@@ -51,6 +59,10 @@ export const UserContextProvider = ({ children }) => {
           email: response.data.user.email,
         });
         navigation("/dashboard");
+        break;
+
+      409:
+        handleError("User already exists");
         break;
 
       default:
