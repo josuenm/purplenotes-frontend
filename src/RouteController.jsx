@@ -25,6 +25,7 @@ export default function RouteController() {
       navigate("/dashboard");
       return;
     }
+
     if (!isRedirect) {
       navigate("/");
     }
