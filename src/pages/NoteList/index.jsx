@@ -2,7 +2,7 @@ import Moment from "moment";
 import Head from "../../components/Head";
 import nookies from "nookies";
 import { SafeZone } from "../../components/SafeZone";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { NotesContext } from "../../contexts/notesContext";
 import { Link } from "react-router-dom";
 import { DashboardHeader } from "../../components/DashboardHeader";
@@ -72,12 +72,7 @@ export const Card = ({ note }) => {
 };
 
 export const NoteList = () => {
-  const { notes, create, list } = useContext(NotesContext);
-
-  useEffect(() => {
-    list();
-  }, []);
-
+  const { notes, create } = useContext(NotesContext);
   return (
     <Container>
       <Head title="Dashboard | JavaScript Notes" description="" />
