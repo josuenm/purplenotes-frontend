@@ -1,5 +1,5 @@
 import axios from "axios";
-import nookies from "nookies";
+import { parseCookies } from "nookies";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -25,7 +25,7 @@ export const UserServices = {
   updateBasicInfo: async (params) => {
     return await api
       .put("/", params, {
-        headers: { "purplenotes.token": nookies.get()["purplenotes.token"] },
+        headers: { "purplenotes.token": parseCookies()["purplenotes.token"] },
       })
       .then((data) => data)
       .catch((error) => error.response);
@@ -34,7 +34,7 @@ export const UserServices = {
   updatePassword: async (params) => {
     return await api
       .put("/password", params, {
-        headers: { "purplenotes.token": nookies.get()["purplenotes.token"] },
+        headers: { "purplenotes.token": parseCookies()["purplenotes.token"] },
       })
       .then((data) => data)
       .catch((error) => error.response);
@@ -43,7 +43,7 @@ export const UserServices = {
   deleteAccount: async () => {
     return await api
       .delete("/delete", {
-        headers: { "purplenotes.token": nookies.get()["purplenotes.token"] },
+        headers: { "purplenotes.token": parseCookies()["purplenotes.token"] },
       })
       .then((data) => data)
       .catch((error) => error.response);

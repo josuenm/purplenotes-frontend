@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { GlobalToolsContext } from "./globalToolsContext";
 import { UserServices } from "../services/axios/users";
 import { useNavigate } from "react-router-dom";
-import nookies from "nookies";
+import { setCookie, destroyCookie } from "nookies";
 
 export const UserContext = createContext(null);
 
@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 200:
-        await nookies.set(null, "purplenotes.token", response.data.token);
+        setCookie(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
@@ -53,7 +53,7 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 201:
-        await nookies.set(null, "purplenotes.token", response.data.token);
+        setCookie(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
@@ -136,7 +136,7 @@ export const UserContextProvider = ({ children }) => {
   async function Exit() {
     navigation("/");
     localStorage.removeItem("purplenotes.user");
-    await nookies.destroy(null, "purplenotes.token");
+    destroyCookie(null, "purplenotes.token");
   }
 
   useEffect(() => {

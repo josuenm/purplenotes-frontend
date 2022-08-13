@@ -3,7 +3,6 @@ import { GlobalToolsContext } from "./globalToolsContext";
 import { UserContext } from "./userContext";
 import { NotesServices } from "../services/axios/notes";
 import { useNavigate } from "react-router-dom";
-import nookies from "nookies";
 
 export const NotesContext = createContext(null);
 
@@ -27,7 +26,6 @@ export const NotesContextProvider = ({ children }) => {
   async function list() {
     handleLoading(true);
     const response = await NotesServices.allNotes();
-    console.log(response);
     switch (response.status) {
       case 200:
         if (response.data.length > 0) {

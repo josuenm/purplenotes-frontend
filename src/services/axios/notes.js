@@ -1,5 +1,5 @@
 import axios from "axios";
-import nookies from "nookies";
+import { parseCookies } from "nookies";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -12,7 +12,7 @@ export const NotesServices = {
     return await api
       .get("/", {
         headers: {
-          "purplenotes.token": nookies.get()["purplenotes.token"],
+          "purplenotes.token": parseCookies()["purplenotes.token"],
         },
       })
       .then((data) => data)
@@ -29,7 +29,7 @@ export const NotesServices = {
         },
         {
           headers: {
-            "purplenotes.token": nookies.get()["purplenotes.token"],
+            "purplenotes.token": parseCookies()["purplenotes.token"],
           },
         }
       )
@@ -41,7 +41,7 @@ export const NotesServices = {
     return await api
       .delete(`/${id}`, {
         headers: {
-          "purplenotes.token": nookies.get()["purplenotes.token"],
+          "purplenotes.token": parseCookies()["purplenotes.token"],
         },
       })
       .then((data) => data)
@@ -52,7 +52,7 @@ export const NotesServices = {
     return await api
       .put(`/${id}`, params, {
         headers: {
-          "purplenotes.token": nookies.get()["purplenotes.token"],
+          "purplenotes.token": parseCookies()["purplenotes.token"],
         },
       })
       .then((data) => data)
@@ -63,7 +63,7 @@ export const NotesServices = {
     return await api
       .get(`/search?query=${query}`, {
         headers: {
-          "purplenotes.token": nookies.get()["purplenotes.token"],
+          "purplenotes.token": parseCookies()["purplenotes.token"],
         },
       })
       .then((data) => data)
