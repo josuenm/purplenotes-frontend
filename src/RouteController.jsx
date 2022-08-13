@@ -7,6 +7,7 @@ import { UserEdit } from "./pages/UserEdit";
 import { NoteList } from "./pages/NoteList";
 import { useContext, useEffect } from "react";
 import { UserContext } from "./contexts/userContext";
+import { parseCookies } from "nookies";
 
 export default function RouteController() {
   const { pathname } = useLocation();
@@ -16,20 +17,21 @@ export default function RouteController() {
 
   const redirectionRoutesForUsers = ["/", "/register", "/login"];
 
-  useEffect(() => {
-    const isRedirect = redirectionRoutesForUsers.some(
-      (route) => pathname === route
-    );
+  const isRedirect = redirectionRoutesForUsers.some(
+    (route) => pathname === route
+  );
 
-    if (user && isRedirect) {
-      navigate("/dashboard");
+  useEffect(() => {
+    if (!parseCookies()["purplenotes.token"] && !isRedirect) {
+      navigate("/");
       return;
     }
 
-    if (!isRedirect) {
-      navigate("/");
+    if (isRedirect) {
+      navigate("/dashboard");
+      return;
     }
-  }, [user]);
+  }, []);
 
   return (
     <Routes>
