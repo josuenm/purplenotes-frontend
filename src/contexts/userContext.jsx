@@ -28,7 +28,9 @@ export const UserContextProvider = ({ children }) => {
           name: response.data.user.name,
           email: response.data.user.email,
         });
-        navigation("/dashboard");
+        if(nookies.get()["purplenotes.token"]) {
+          navigation("/dashboard");
+        }
         break;
 
       case 401:
@@ -53,12 +55,14 @@ export const UserContextProvider = ({ children }) => {
 
     switch (response.status) {
       case 201:
-        await nookies.set(null, "purplenotes.token", response.data.token);
+        nookies.set(null, "purplenotes.token", response.data.token);
         handleUser({
           name: response.data.user.name,
           email: response.data.user.email,
         });
-        navigation("/dashboard");
+        if(nookies.get()["purplenotes.token"]) {
+          navigation("/dashboard");
+        }
         break;
 
       409:
