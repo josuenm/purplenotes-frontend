@@ -28,7 +28,10 @@ export const UserContextProvider = ({ children }) => {
           name: response.data.user.name,
           email: response.data.user.email,
         });
-        navigation("/dashboard");
+
+        setTimeout(() => {
+          navigation("/dashboard");
+        }, 1000);
         break;
 
       case 401:
@@ -58,7 +61,9 @@ export const UserContextProvider = ({ children }) => {
           name: response.data.user.name,
           email: response.data.user.email,
         });
-        navigation("/dashboard");
+        setTimeout(() => {
+          navigation("/dashboard");
+        }, 1000);
         break;
 
       case 409:
