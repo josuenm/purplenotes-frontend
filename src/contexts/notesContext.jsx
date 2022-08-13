@@ -27,7 +27,7 @@ export const NotesContextProvider = ({ children }) => {
   async function list() {
     handleLoading(true);
     const response = await NotesServices.allNotes();
-
+    console.log(response);
     switch (response.status) {
       case 200:
         if (response.data.length > 0) {
