@@ -75,10 +75,8 @@ export const NoteList = () => {
   const { notes, create, list } = useContext(NotesContext);
 
   useEffect(() => {
-    if (nookies.get()["purplenotes.token"]) {
-      list();
-    }
-  }, [nookies.get()["purplenotes.token"]]);
+    list();
+  }, []);
 
   return (
     <Container>
