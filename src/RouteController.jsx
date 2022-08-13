@@ -5,15 +5,11 @@ import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { UserEdit } from "./pages/UserEdit";
 import { NoteList } from "./pages/NoteList";
-import { useContext, useEffect } from "react";
-import { UserContext } from "./contexts/userContext";
-import { parseCookies } from "nookies";
+import { useEffect } from "react";
 
 export default function RouteController() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-
-  const { user } = useContext(UserContext);
 
   const redirectionRoutesForUsers = ["/", "/register", "/login"];
 
@@ -22,7 +18,7 @@ export default function RouteController() {
   );
 
   useEffect(() => {
-    if (!parseCookies()["purplenotes.token"] && !isRedirect) {
+    if (!localStorage.getItem("purplenotes.user") && !isRedirect) {
       navigate("/");
       return;
     }

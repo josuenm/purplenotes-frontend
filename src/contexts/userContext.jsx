@@ -144,7 +144,9 @@ export const UserContextProvider = ({ children }) => {
     const userLocalStorage = JSON.parse(
       localStorage.getItem("purplenotes.user")
     );
-    setUser(userLocalStorage);
+    if (userLocalStorage) {
+      setUser(userLocalStorage);
+    }
   }, []);
 
   return (
