@@ -48,7 +48,7 @@ export const DashboardHeader = () => {
               <DropDownItem onClick={() => navigation("/dashboard/user/edit")}>
                 User edit
               </DropDownItem>
-              <DropDownItem onClick={() => Exit()}>Exit</DropDownItem>
+              <DropDownItem onClick={Exit}>Exit</DropDownItem>
             </DropDownContainer>
           </motion.div>
         </AnimatePresence>
