@@ -21,12 +21,11 @@ export default function RouteController() {
       (route) => pathname === route
     );
 
-    if (user) {
-      if (isRedirect) {
-        navigate("/dashboard");
-        return;
-      }
-    } else if (!isRedirect) {
+    if (user && isRedirect) {
+      navigate("/dashboard");
+      return;
+    }
+    if (!isRedirect) {
       navigate("/");
     }
   }, [user]);
