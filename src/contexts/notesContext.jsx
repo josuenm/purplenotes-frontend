@@ -24,8 +24,6 @@ export const NotesContextProvider = ({ children }) => {
   }
 
   async function list() {
-    handleLoading(true);
-
     const response = await NotesServices.allNotes();
     switch (response.status) {
       case 200:
@@ -45,8 +43,6 @@ export const NotesContextProvider = ({ children }) => {
         handleError("Something wrong, try again");
         break;
     }
-
-    handleLoading(false);
   }
 
   async function create() {
@@ -72,8 +68,6 @@ export const NotesContextProvider = ({ children }) => {
   }
 
   async function update(id, params) {
-    handleLoading(true);
-
     const response = await NotesServices.update(id, params);
 
     switch (response.status) {
@@ -90,8 +84,6 @@ export const NotesContextProvider = ({ children }) => {
         handleError("Something wrong, try again");
         break;
     }
-
-    handleLoading(false);
   }
 
   async function search(query) {
