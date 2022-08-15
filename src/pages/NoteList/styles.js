@@ -30,8 +30,15 @@ export const CreateNoteButton = styled.button`
   text-align: center;
 
   transition: ease 0.2s opacity;
-  &:hover {
-    opacity: 0.85;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      opacity: 0.85;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      opacity: 0.85;
+    }
   }
 `;
 
@@ -85,10 +92,18 @@ export const NoteCard = styled.div`
   flex-direction: column;
   gap: 1rem;
 
-  transition: ease 0.4s border;
-  &:hover {
-    border: 1px solid var(--purple-100);
-    color: var(--purple-100);
+  transition: ease 0.4s border, color;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      border: 1px solid var(--purple-100);
+      color: var(--purple-100);
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      border: 1px solid var(--purple-100);
+      color: var(--purple-100);
+    }
   }
 
   @media screen and (max-width: 570px) {
@@ -129,8 +144,15 @@ export const DeleteButton = styled.button`
   background-color: #ff4d4d;
 
   transition: ease 0.4s opacity;
-  &:hover {
-    opacity: 0.7;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      opacity: 0.7;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      opacity: 0.7;
+    }
   }
 
   @media screen and (max-width: 570px) {
@@ -148,8 +170,15 @@ export const AccessButton = styled.button`
   background-color: var(--purple-100);
 
   transition: ease 0.4s opacity;
-  &:hover {
-    opacity: 0.7;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      opacity: 0.7;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      opacity: 0.7;
+    }
   }
 
   @media screen and (max-width: 570px) {

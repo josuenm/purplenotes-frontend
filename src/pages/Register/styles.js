@@ -24,8 +24,15 @@ export const OtherOption = styled.p`
   a {
     color: var(--purple-100);
 
-    &:hover {
-      text-decoration: underline;
+    @media screen and (max-width: 991.98px) {
+      &:active {
+        text-decoration: underline;
+      }
+    }
+    @media screen and (min-width: 991.99px) {
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;

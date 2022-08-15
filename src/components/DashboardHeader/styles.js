@@ -19,8 +19,16 @@ export const UserButton = styled.button`
   align-items: center;
 
   transition: ease 0.4s opacity;
-  &:hover {
-    opacity: 0.7;
+
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      opacity: 0.7;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      opacity: 0.7;
+    }
   }
 
   @media screen and (max-width: 570px) {
@@ -88,8 +96,15 @@ export const DropDownItem = styled.a`
   cursor: pointer;
 
   transition: ease 0.4s opacity;
-  &:hover {
-    opacity: 0.8;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      opacity: 0.8;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      opacity: 0.8;
+    }
   }
 `;
 

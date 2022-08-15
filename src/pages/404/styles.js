@@ -46,7 +46,14 @@ export const ReturnButton = styled.button`
   font-size: 1rem;
 
   transition: ease 0.4s opacity;
-  &:hover {
-    opacity: 0.7;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      opacity: 0.7;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      opacity: 0.7;
+    }
   }
 `;

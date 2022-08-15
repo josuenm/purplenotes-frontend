@@ -47,7 +47,13 @@ export const DeleteButton = styled.button`
   cursor: pointer;
 
   transition: ease 0.4s background-color;
-  &:hover {
-    background-color: #c92525;
-  }
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      background-color: #c92525;
+    }
+    @media screen and (min-width: 991.99px) {
+      &:hover {
+        background-color: #c92525;
+      }
+    }
 `;

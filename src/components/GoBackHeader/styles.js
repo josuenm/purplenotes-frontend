@@ -15,8 +15,16 @@ export const BackButton = styled.button`
   color: var(--purple-100);
 
   transition: ease 0.2s background-color, color;
-  &:hover {
-    background-color: var(--purple-100);
-    color: #fff;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      background: var(--purple-100);
+      color: #fff;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      background: var(--purple-100);
+      color: #fff;
+    }
   }
 `;

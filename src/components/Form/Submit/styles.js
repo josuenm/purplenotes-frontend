@@ -9,9 +9,17 @@ export const Container = styled.input`
   border-radius: 0.25rem;
   cursor: pointer;
 
-  transition: all 0.2s;
-  &:hover {
-    background: var(--purple-100);
-    color: #fff;
+  transition: ease 0.2s background, color;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      background: var(--purple-100);
+      color: #fff;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      background: var(--purple-100);
+      color: #fff;
+    }
   }
 `;

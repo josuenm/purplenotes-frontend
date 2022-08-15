@@ -52,9 +52,17 @@ export const LoginButton = styled.button`
   border-radius: 0.25rem;
 
   transition: ease 0.4s background-color, color;
-  &:hover {
-    background-color: var(--purple-100);
-    color: #fff;
+  @media screen and (max-width: 991.98px) {
+    &:active {
+      background-color: var(--purple-100);
+      color: #fff;
+    }
+  }
+  @media screen and (min-width: 991.99px) {
+    &:hover {
+      background-color: var(--purple-100);
+      color: #fff;
+    }
   }
 `;
 
@@ -76,10 +84,18 @@ export const ButtonContainer = styled.div`
     border: 1px solid var(--purple-100);
     color: var(--purple-100);
 
-    transition: all 0.2s;
-    &:hover {
-      background: var(--purple-100);
-      color: #fff;
+    transition: ease 0.2s background-color, color;
+    @media screen and (max-width: 991.98px) {
+      &:active {
+        background-color: var(--purple-100);
+        color: #fff;
+      }
+    }
+    @media screen and (min-width: 991.99px) {
+      &:hover {
+        background-color: var(--purple-100);
+        color: #fff;
+      }
     }
   }
 `;
