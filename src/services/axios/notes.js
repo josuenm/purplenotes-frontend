@@ -9,16 +9,14 @@ const api = axios.create({
 
 export const NotesServices = {
   allNotes: async () => {
-    if (typeof window !== "undefined") {
-      return await api
-        .get("/", {
-          headers: {
-            "purplenotes.token": parseCookies()["purplenotes.token"],
-          },
-        })
-        .then((data) => data)
-        .catch((error) => error.response);
-    }
+    return await api
+      .get("/", {
+        headers: {
+          "purplenotes.token": parseCookies()["purplenotes.token"],
+        },
+      })
+      .then((data) => data)
+      .catch((error) => error.response);
   },
 
   create: async () => {
