@@ -6,6 +6,7 @@ import { Login } from "./pages/Login";
 import { UserEdit } from "./pages/UserEdit";
 import { NoteList } from "./pages/NoteList";
 import { useEffect } from "react";
+import NotFound from "./pages/404";
 
 export default function RouteController() {
   const { pathname } = useLocation();
@@ -37,6 +38,7 @@ export default function RouteController() {
       <Route path="/dashboard" element={<NoteList />} />
       <Route path="/dashboard/:id/edit" element={<EditNote />} />
       <Route path="/dashboard/user/edit" element={<UserEdit />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
