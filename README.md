@@ -2,6 +2,10 @@
 
 Essa é uma aplicação para anotações com foco em acessar de qualquer lugar e a hora que quiser.
 
+<p>
+Acesse agora <a href="https://purplenotes.vercel.app" target="_blank">https://purplenotes.vercel.app</a>.
+</p>
+
 # Linguagens, bibliotecas e deploy 😎
 
 - ReactJS (gerado por <a href="https://vitejs.dev" target="_blank">vite</a>)
