@@ -1,8 +1,8 @@
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { NotesServices } from "../services/axios/notes";
 import { GlobalToolsContext } from "./globalToolsContext";
 import { UserContext } from "./userContext";
-import { NotesServices } from "../services/axios/notes";
-import { useNavigate } from "react-router-dom";
 
 export const NotesContext = createContext(null);
 
@@ -71,11 +71,6 @@ export const NotesContextProvider = ({ children }) => {
     const response = await NotesServices.update(id, params);
 
     switch (response.status) {
-      case 200:
-        list();
-        handleCurrentNote(response.data);
-        break;
-
       case 401:
         Exit();
         break;
