@@ -120,11 +120,12 @@ const Dashboard: NextPage = () => {
         <Heading fontSize={21}>Notes:</Heading>
 
         <Flex
-          w={["full", "full", "fit-content"]}
+          w={["full", "full", "full"]}
           mx="auto"
           mt={12}
           direction={["column", "column", "row"]}
-          gap={5}
+          justify="center"
+          gap={[5, 5, 16]}
           flexWrap="wrap"
         >
           {notes.map((item) => (
