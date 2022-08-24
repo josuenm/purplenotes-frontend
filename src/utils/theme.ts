@@ -51,20 +51,12 @@ export default extendTheme({
       },
     },
     Button: {
-      variants: {
+      colorScheme: {
         violet: {
           bgColor: "violet.600",
           color: "white",
           _hover: {
             bgColor: "violet.400",
-          },
-        },
-        "violet.outline": {
-          borderWidth: 1,
-          borderColor: "violet.600",
-          color: "violet.600",
-          _hover: {
-            bgColor: "violet.100",
           },
         },
       },
