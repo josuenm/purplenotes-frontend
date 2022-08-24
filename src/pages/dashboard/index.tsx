@@ -1,6 +1,72 @@
-import { Button, Container, Flex, Heading } from "@chakra-ui/react";
+import LogoImage from "@assets/images/white-logo.png";
+import {
+  Box,
+  Button,
+  chakra,
+  Container,
+  Flex,
+  Heading,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import { NextPage } from "next";
+import NextImage from "next/image";
+import NextLink from "next/link";
 import NoteCard from "src/components/NoteCard";
+
+const Image = chakra(NextImage, {
+  baseStyle: { maxH: 700, maxW: 700 },
+  shouldForwardProp: (prop) =>
+    [
+      "width",
+      "height",
+      "src",
+      "alt",
+      "quality",
+      "placeholder",
+      "blurDataURL",
+      "loader ",
+    ].includes(prop),
+});
+
+const Header = () => {
+  return (
+    <Box
+      position="fixed"
+      top={0}
+      left={0}
+      right={0}
+      zIndex={2}
+      bgColor="violetOpacity"
+      borderBottomWidth={1}
+      borderBottomColor="violet.500"
+      __css={{ backdropFilter: "blur(6px)" }}
+    >
+      <Container py={2} display="flex" justifyContent="space-between">
+        <Image src={LogoImage} alt="Logo" width={140} height={15} />
+        <Menu>
+          <MenuButton
+            as={Button}
+            style={{ backgroundColor: "transparent" }}
+            color="white"
+            borderWidth={1}
+            borderColor="white"
+          >
+            Josué
+          </MenuButton>
+          <MenuList>
+            <NextLink href="/dashboard/userEdit">
+              <MenuItem>User edit</MenuItem>
+            </NextLink>
+            <MenuItem>Exit</MenuItem>
+          </MenuList>
+        </Menu>
+      </Container>
+    </Box>
+  );
+};
 
 const Dashboard: NextPage = () => {
   const notes = [
@@ -14,14 +80,35 @@ const Dashboard: NextPage = () => {
       title: "New note",
       body: "<p>New note hahahaha</p>",
     },
+    {
+      _id: 3,
+      title: "New note",
+      body: "<p>New note hahahaha</p>",
+    },
+    {
+      _id: 4,
+      title: "New note",
+      body: "<p>New note hahahaha</p>",
+    },
+    {
+      _id: 5,
+      title: "New note",
+      body: "<p>New note hahahaha</p>",
+    },
+    {
+      _id: 6,
+      title: "New note",
+      body: "<p>New note hahahaha</p>",
+    },
   ];
 
   return (
     <>
+      <Header />
       <Flex
         bgColor="violet.600"
         w="100%"
-        py={16}
+        py={24}
         justify="center"
         align="center"
       >
