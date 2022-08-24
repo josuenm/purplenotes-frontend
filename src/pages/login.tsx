@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NextPage } from "next";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import * as yup from "yup";
 
 interface IFormInputs {
@@ -19,8 +19,10 @@ interface IFormInputs {
 }
 
 interface InputProps {
-  register: any;
-  error: any;
+  register: UseFormRegisterReturn;
+  error?: {
+    message?: string;
+  };
 }
 
 const schema = yup
@@ -74,7 +76,10 @@ const Login: NextPage = () => {
           gap={5}
           shadow="2xl"
           p={[5, 5, 10]}
-          borderRadius="3xl"
+          bgColor="white"
+          borderRadius="xl"
+          w={["full", "full", "50%"]}
+          minWidth={[0, 0, 400]}
         >
           <Email register={{ ...register("email") }} error={errors?.email} />
           <Password
@@ -82,15 +87,7 @@ const Login: NextPage = () => {
             error={errors?.password}
           />
 
-          <Button
-            bgColor="violet.600"
-            color="white"
-            _hover={{
-              bgColor: "violet.400",
-            }}
-          >
-            Login
-          </Button>
+          <Button variant="violet">Login</Button>
         </Flex>
       </Center>
     </Container>
