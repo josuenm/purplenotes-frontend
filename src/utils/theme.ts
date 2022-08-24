@@ -7,7 +7,7 @@ export default extendTheme({
   },
 
   colors: {
-    whiteOpacity: "rgba(255,255,255,.5)",
+    whiteOpacity: "rgba(238, 238, 238,.5)",
     violet: {
       50: "#faf5ff",
       100: "#f3e8ff",
@@ -35,6 +35,11 @@ export default extendTheme({
         maxWidth: 1100,
       },
     },
+    Input: {
+      defaultProps: {
+        focusBorderColor: "violet.600",
+      },
+    },
     Heading: {
       baseStyle: {
         fontWeight: "bold",
@@ -43,6 +48,17 @@ export default extendTheme({
     Text: {
       baseStyle: {
         fontWeight: "medium",
+      },
+    },
+    Button: {
+      variants: {
+        violet: {
+          bgColor: "violet.600",
+          color: "white",
+          _hover: {
+            bgColor: "violet.400",
+          },
+        },
       },
     },
   },
