@@ -38,7 +38,7 @@ const Header = () => {
       px={2}
       w="full"
       borderBottomWidth={1}
-      borderBottomColor="gray.100"
+      borderBottomColor="gray.300"
       bgColor="whiteOpacity"
       __css={{ backdropFilter: "blur(6px)" }}
     >
