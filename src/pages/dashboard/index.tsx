@@ -14,6 +14,7 @@ import {
 import { NextPage } from "next";
 import NextImage from "next/image";
 import NextLink from "next/link";
+import { IoMdArrowDropdown } from "react-icons/io";
 import NoteCard from "src/components/NoteCard";
 
 const Image = chakra(NextImage, {
@@ -45,7 +46,7 @@ const Header = () => {
       __css={{ backdropFilter: "blur(6px)" }}
     >
       <Container py={2} display="flex" justifyContent="space-between">
-        <Image src={LogoImage} alt="Logo" width={140} height={15} />
+        <Image src={LogoImage} alt="Logo" width={160} height={25} />
         <Menu>
           <MenuButton
             as={Button}
@@ -53,6 +54,7 @@ const Header = () => {
             color="white"
             borderWidth={1}
             borderColor="white"
+            rightIcon={<IoMdArrowDropdown />}
           >
             Josué
           </MenuButton>
