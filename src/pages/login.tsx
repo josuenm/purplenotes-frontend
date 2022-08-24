@@ -4,12 +4,13 @@ import {
   Container,
   Flex,
   FormControl,
-  FormHelperText,
+  FormErrorMessage,
   FormLabel,
   Input,
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NextPage } from "next";
+import NextLink from "next/link";
 import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import * as yup from "yup";
 
@@ -27,27 +28,42 @@ interface InputProps {
 
 const schema = yup
   .object({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
+    email: yup
+      .string()
+      .email("Invalid email")
+      .required("The field is required"),
+    password: yup.string().required("The field is required"),
   })
   .required();
 
 const Email = ({ register, error }: InputProps) => {
   return (
-    <FormControl>
-      <FormLabel>Email</FormLabel>
-      <Input type="email" {...register} bgColor="violet.50" />
-      {error && <FormHelperText>{error.message}</FormHelperText>}
+    <FormControl as="fieldset" isInvalid={!!error}>
+      <FormLabel>Email:</FormLabel>
+      <Input
+        type="email"
+        {...register}
+        bgColor="violet.50"
+        placeholder="Type your email..."
+        _placeholder={{ fontSize: 14 }}
+      />
+      {error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormControl>
   );
 };
 
 const Password = ({ register, error }: InputProps) => {
   return (
-    <FormControl>
-      <FormLabel>Password</FormLabel>
-      <Input type="password" {...register} bgColor="violet.50" />
-      {error && <FormHelperText>{error.message}</FormHelperText>}
+    <FormControl as="fieldset" isInvalid={!!error}>
+      <FormLabel>Password:</FormLabel>
+      <Input
+        type="password"
+        {...register}
+        bgColor="violet.50"
+        placeholder="Type your password..."
+        _placeholder={{ fontSize: 14 }}
+      />
+      {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormControl>
   );
 };
@@ -72,6 +88,8 @@ const Login: NextPage = () => {
     >
       <Center w="full" display="flex" justifyContent="center">
         <Flex
+          as="form"
+          onSubmit={handleSubmit(onSubmit)}
           direction="column"
           gap={5}
           shadow="2xl"
@@ -87,7 +105,13 @@ const Login: NextPage = () => {
             error={errors?.password}
           />
 
-          <Button variant="violet">Login</Button>
+          <Button variant="violet" type="submit">
+            Login
+          </Button>
+
+          <NextLink href="/register">
+            <Button variant="violet.outline">Register</Button>
+          </NextLink>
         </Flex>
       </Center>
     </Container>
