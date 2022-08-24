@@ -59,6 +59,19 @@ export default extendTheme({
             bgColor: "violet.400",
           },
         },
+        "violet.outline": {
+          borderWidth: 1,
+          borderColor: "violet.600",
+          color: "violet.600",
+          _hover: {
+            bgColor: "violet.100",
+          },
+        },
+      },
+    },
+    FormLabel: {
+      baseStyle: {
+        fontSize: 15,
       },
     },
   },
