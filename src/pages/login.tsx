@@ -105,12 +105,14 @@ const Login: NextPage = () => {
             error={errors?.password}
           />
 
-          <Button variant="violet" type="submit">
+          <Button colorScheme="violet" type="submit">
             Login
           </Button>
 
           <NextLink href="/register">
-            <Button variant="violet.outline">Register</Button>
+            <Button colorScheme="violet" variant="outline">
+              Register
+            </Button>
           </NextLink>
         </Flex>
       </Center>
