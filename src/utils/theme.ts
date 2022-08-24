@@ -7,6 +7,7 @@ export default extendTheme({
   },
 
   colors: {
+    violetOpacity: "rgba(147, 51, 234,.5)",
     whiteOpacity: "rgba(238, 238, 238,.5)",
     violet: {
       50: "#faf5ff",
