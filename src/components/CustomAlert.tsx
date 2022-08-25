@@ -16,7 +16,7 @@ export const CustomAlert = ({ alert }: CustomAlertProps) => {
       <motion.div
         style={{
           position: "fixed",
-          zIndex: 3,
+          zIndex: 10,
           left: "50%",
           transform: "translateX(-50%)",
         }}
