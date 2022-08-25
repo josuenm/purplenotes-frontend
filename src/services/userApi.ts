@@ -1,4 +1,5 @@
 import axios from "axios";
+import { parseCookies } from "nookies";
 import { LoginProps, RegisterProps, UserProps } from "../types/UserProps";
 
 const api = axios.create({
@@ -22,7 +23,37 @@ const userApi = {
 
   updateBasics: async (data: UserProps) => {
     return await api
-      .put("/", data)
+      .put("/", data, {
+        headers: {
+          "purplenotes.token": parseCookies()["purplenotes.token"],
+        },
+      })
+      .then((res) => res)
+      .catch((err) => err.response);
+  },
+
+  newPassword: async (password: string) => {
+    return await api
+      .put(
+        "/password",
+        { password },
+        {
+          headers: {
+            "purplenotes.token": parseCookies()["purplenotes.token"],
+          },
+        }
+      )
+      .then((res) => res)
+      .catch((err) => err.response);
+  },
+
+  deleteAccount: async () => {
+    return await api
+      .delete("/delete", {
+        headers: {
+          "purplenotes.token": parseCookies()["purplenotes.token"],
+        },
+      })
       .then((res) => res)
       .catch((err) => err.response);
   },
