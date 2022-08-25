@@ -1,7 +1,16 @@
-import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { NotesContext } from "@contexts/NotesContext";
+import NextLink from "next/link";
 import { useContext } from "react";
 import { NoteProps } from "../types/NoteProps";
+import { DeleteAlert } from "./DeleteAlert";
 
 interface NoteCardProps {
   note: NoteProps;
@@ -24,7 +33,9 @@ const NoteCard = ({ note }: NoteCardProps) => {
     return newBody;
   };
 
-  const { Delete } = useContext(NotesContext);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { DeleteNote } = useContext(NotesContext);
 
   return (
     <Box
@@ -38,10 +49,20 @@ const NoteCard = ({ note }: NoteCardProps) => {
       <Text>{formatedBody(note.body)}</Text>
 
       <Flex mt={5} direction="column" gap={2}>
-        <Button colorScheme="violet">Access</Button>
-        <Button colorScheme="red" onClick={() => Delete(note._id)}>
+        <NextLink href={`/dashboard/${note._id}/editNote`}>
+          <Button colorScheme="violet">Access</Button>
+        </NextLink>
+        <Button colorScheme="red" onClick={onOpen}>
           Delete
         </Button>
+
+        <DeleteAlert
+          title="Delete Note"
+          description="Are you sure? You can't undo this action afterwards."
+          isOpen={isOpen}
+          onClose={onClose}
+          next={() => DeleteNote(note._id)}
+        />
       </Flex>
     </Box>
   );
