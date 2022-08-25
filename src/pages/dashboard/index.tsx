@@ -10,10 +10,14 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
 } from "@chakra-ui/react";
+import { NotesContext } from "@contexts/NotesContext";
+import { UserContext } from "@contexts/UserContext";
 import { NextPage } from "next";
 import NextImage from "next/image";
 import NextLink from "next/link";
+import { useContext, useEffect } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import NoteCard from "src/components/NoteCard";
 
@@ -33,6 +37,8 @@ const Image = chakra(NextImage, {
 });
 
 const Header = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <Box
       position="fixed"
@@ -56,7 +62,9 @@ const Header = () => {
             borderColor="white"
             rightIcon={<IoMdArrowDropdown />}
           >
-            Josué
+            {user && user?.name.length > 6
+              ? user?.name.substring(0, 6) + "..."
+              : user?.name}
           </MenuButton>
           <MenuList>
             <NextLink href="/dashboard/userEdit">
@@ -71,38 +79,12 @@ const Header = () => {
 };
 
 const Dashboard: NextPage = () => {
-  const notes = [
-    {
-      _id: 1,
-      title: "New note",
-      body: "<p>New note hahahaha</p>",
-    },
-    {
-      _id: 2,
-      title: "New note",
-      body: "<p>New note hahahaha</p>",
-    },
-    {
-      _id: 3,
-      title: "New note",
-      body: "<p>New note hahahaha</p>",
-    },
-    {
-      _id: 4,
-      title: "New note",
-      body: "<p>New note hahahaha</p>",
-    },
-    {
-      _id: 5,
-      title: "New note",
-      body: "<p>New note hahahaha</p>",
-    },
-    {
-      _id: 6,
-      title: "New note",
-      body: "<p>New note hahahaha</p>",
-    },
-  ];
+  const { List, Create, notes } = useContext(NotesContext);
+
+  useEffect(() => {
+    List();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -114,7 +96,7 @@ const Dashboard: NextPage = () => {
         justify="center"
         align="center"
       >
-        <Button>Create new note</Button>
+        <Button onClick={Create}>Create new note</Button>
       </Flex>
       <Container py={12}>
         <Heading fontSize={21}>Notes:</Heading>
@@ -128,9 +110,13 @@ const Dashboard: NextPage = () => {
           gap={[5, 5, 16]}
           flexWrap="wrap"
         >
-          {notes.map((item) => (
-            <NoteCard note={item} key={item._id} />
-          ))}
+          {notes.length >= 1 ? (
+            notes.map((item) => <NoteCard note={item} key={item._id} />)
+          ) : (
+            <Flex w="full" justify="center">
+              <Text textAlign="center">Nothing to list</Text>
+            </Flex>
+          )}
         </Flex>
       </Container>
     </>
