@@ -8,8 +8,10 @@ import {
   Heading,
   Input,
 } from "@chakra-ui/react";
+import { UserContext } from "@contexts/UserContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NextPage } from "next";
+import { useContext, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import HeaderWithBackButton from "src/components/HeaderWithBackButton";
 
@@ -98,17 +100,31 @@ const NewPassword = () => {
 };
 
 const BasicInfo = () => {
+  const { UpdateBasics, user } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormBasicInfo>({
+    defaultValues: useMemo(() => {
+      if (typeof window !== "undefined") {
+        let localUser = JSON.parse(
+          localStorage.getItem("purplenotes.user") as string
+        );
+        return localUser;
+      }
+    }, []),
     resolver: yupResolver(basicInfoSchema),
   });
-  const onSubmit = (data: IFormBasicInfo) => console.log(data);
+  const onSubmit = (data: IFormBasicInfo) => {
+    UpdateBasics(data);
+  };
 
   return (
     <Flex
+      as="form"
+      onSubmit={handleSubmit(onSubmit)}
       w={["full", "full", "50%"]}
       minWidth={[0, 0, 400]}
       direction="column"
