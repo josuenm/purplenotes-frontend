@@ -10,11 +10,30 @@ import {
 } from "@chakra-ui/react";
 import { UserContext } from "@contexts/UserContext";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import Head from "next/head";
 import NextLink from "next/link";
+import { parseCookies } from "nookies";
 import { useContext } from "react";
 import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import * as yup from "yup";
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { "purplenotes.token": token } = parseCookies(ctx);
+
+  if (token) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
 
 interface IFormInputs {
   email: string;
@@ -83,45 +102,50 @@ const Login: NextPage = () => {
   const onSubmit = (data: IFormInputs) => Login(data);
 
   return (
-    <Container
-      display="flex"
-      flexDirection={["column", "column", "row"]}
-      justifyContent={["center", "center", "space-between"]}
-      alignItems={["flex-start", "flex-start", "center"]}
-      gap={5}
-      h="100vh"
-    >
-      <Center w="full" display="flex" justifyContent="center">
-        <Flex
-          as="form"
-          onSubmit={handleSubmit(onSubmit)}
-          direction="column"
-          gap={5}
-          shadow="2xl"
-          p={[5, 5, 10]}
-          bgColor="white"
-          borderRadius="xl"
-          w={["full", "full", "50%"]}
-          minWidth={[0, 0, 400]}
-        >
-          <Email register={{ ...register("email") }} error={errors?.email} />
-          <Password
-            register={{ ...register("password") }}
-            error={errors?.password}
-          />
+    <>
+      <Head>
+        <title>Login | Purple Notes</title>
+      </Head>
+      <Container
+        display="flex"
+        flexDirection={["column", "column", "row"]}
+        justifyContent={["center", "center", "space-between"]}
+        alignItems={["flex-start", "flex-start", "center"]}
+        gap={5}
+        h="100vh"
+      >
+        <Center w="full" display="flex" justifyContent="center">
+          <Flex
+            as="form"
+            onSubmit={handleSubmit(onSubmit)}
+            direction="column"
+            gap={5}
+            shadow="2xl"
+            p={[5, 5, 10]}
+            bgColor="white"
+            borderRadius="xl"
+            w={["full", "full", "50%"]}
+            minWidth={[0, 0, 400]}
+          >
+            <Email register={{ ...register("email") }} error={errors?.email} />
+            <Password
+              register={{ ...register("password") }}
+              error={errors?.password}
+            />
 
-          <Button colorScheme="violet" type="submit">
-            Login
-          </Button>
-
-          <NextLink href="/register">
-            <Button colorScheme="violet" variant="outline">
-              Register
+            <Button colorScheme="violet" type="submit">
+              Login
             </Button>
-          </NextLink>
-        </Flex>
-      </Center>
-    </Container>
+
+            <NextLink href="/register">
+              <Button colorScheme="violet" variant="outline">
+                Register
+              </Button>
+            </NextLink>
+          </Flex>
+        </Center>
+      </Container>
+    </>
   );
 };
 
