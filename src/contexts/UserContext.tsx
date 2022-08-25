@@ -13,6 +13,9 @@ interface UserContextProps {
   Login: (data: LoginProps) => Promise<void>;
   Register: (data: RegisterProps) => Promise<void>;
   UpdateBasics: (data: UserProps) => Promise<void>;
+  NewPassword: (password: string) => Promise<void>;
+  DeleteAccount: () => Promise<void>;
+  Exit: () => void;
   user: UserProps | undefined;
 }
 
@@ -22,6 +25,12 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
   const { handleLoading, handleAlert } = useContext(GlobalToolsContext);
 
   const [user, setUser] = useState<UserProps | undefined>();
+
+  function Exit() {
+    nookies.destroy(undefined, "purplenotes.token");
+    localStorage.removeItem("purplenotes.user");
+    Router.push("/");
+  }
 
   function handleUser(
     token?: string | undefined,
@@ -62,7 +71,7 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
         break;
 
       default:
-        handleAlert("error", "Email or password is incorrect");
+        handleAlert("error", "Something wrong, try again");
         break;
     }
 
@@ -96,7 +105,7 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
         break;
 
       default:
-        handleAlert("error", "Email or password is incorrect");
+        handleAlert("error", "Something wrong, try again");
         break;
     }
 
@@ -124,19 +133,62 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
         break;
 
       case 401:
-        handleAlert("error", "Email or password is incorrect");
-        break;
-
-      case 404:
-        handleAlert("error", "Email or password is incorrect");
-        break;
-
-      case 409:
-        handleAlert("error", "User already exists");
+        Exit();
+        handleAlert("error", "Unauthorized");
         break;
 
       default:
-        handleAlert("error", "Email or password is incorrect");
+        handleAlert("error", "Something wrong, try again");
+        break;
+    }
+
+    handleLoading(false);
+  }
+
+  async function NewPassword(password: string) {
+    handleLoading(true);
+
+    const response = await userApi.newPassword(password);
+
+    switch (response.status) {
+      case 200:
+        handleUser(undefined, {
+          name: response.data.user.name,
+          email: response.data.user.email,
+        });
+        handleAlert("success", "Password updated");
+        break;
+
+      case 401:
+        Exit();
+        handleAlert("error", "Unauthorized");
+        break;
+
+      default:
+        handleAlert("error", "Something wrong, try again");
+        break;
+    }
+
+    handleLoading(false);
+  }
+
+  async function DeleteAccount() {
+    handleLoading(true);
+
+    const response = await userApi.deleteAccount();
+
+    switch (response.status) {
+      case 204:
+        handleAlert("success", "Password updated");
+        break;
+
+      case 401:
+        Exit();
+        handleAlert("error", "Unauthorized");
+        break;
+
+      default:
+        handleAlert("error", "Something wrong, try again");
         break;
     }
 
@@ -153,7 +205,17 @@ export const UserContextProvider = ({ children }: ProviderProps) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ Login, Register, UpdateBasics, user }}>
+    <UserContext.Provider
+      value={{
+        Login,
+        Register,
+        UpdateBasics,
+        DeleteAccount,
+        NewPassword,
+        Exit,
+        user,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
