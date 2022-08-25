@@ -14,12 +14,31 @@ import {
 } from "@chakra-ui/react";
 import { NotesContext } from "@contexts/NotesContext";
 import { UserContext } from "@contexts/UserContext";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import Head from "next/head";
 import NextImage from "next/image";
 import NextLink from "next/link";
+import { parseCookies } from "nookies";
 import { useContext, useEffect } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import NoteCard from "src/components/NoteCard";
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { "purplenotes.token": token } = parseCookies(ctx);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
 
 const Image = chakra(NextImage, {
   baseStyle: { maxH: 700, maxW: 700 },
@@ -37,7 +56,7 @@ const Image = chakra(NextImage, {
 });
 
 const Header = () => {
-  const { user } = useContext(UserContext);
+  const { Exit, user } = useContext(UserContext);
 
   return (
     <Box
@@ -70,7 +89,7 @@ const Header = () => {
             <NextLink href="/dashboard/userEdit">
               <MenuItem>User edit</MenuItem>
             </NextLink>
-            <MenuItem>Exit</MenuItem>
+            <MenuItem onClick={Exit}>Exit</MenuItem>
           </MenuList>
         </Menu>
       </Container>
@@ -88,6 +107,9 @@ const Dashboard: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Dashboard | Purple Notes</title>
+      </Head>
       <Header />
       <Flex
         bgColor="violet.600"
