@@ -3,7 +3,7 @@ import { parseCookies } from "nookies";
 import { LoginProps, RegisterProps, UserProps } from "../types/UserProps";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/users",
+  baseURL: `${process.env.BACK_END_URL}/users`,
 });
 
 const userApi = {

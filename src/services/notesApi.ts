@@ -2,7 +2,7 @@ import axios from "axios";
 import { parseCookies } from "nookies";
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/notes",
+  baseURL: `${process.env.BACK_END_URL}/notes`,
 });
 
 const notesApi = {
