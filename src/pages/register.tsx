@@ -8,9 +8,11 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
+import { UserContext } from "@contexts/UserContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NextPage } from "next";
 import NextLink from "next/link";
+import { useContext } from "react";
 import { useForm, UseFormRegisterReturn } from "react-hook-form";
 import * as yup from "yup";
 
@@ -108,6 +110,8 @@ const PasswordConfirmation = ({ register, error }: InputProps) => {
 };
 
 const Login: NextPage = () => {
+  const { Register } = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -115,7 +119,8 @@ const Login: NextPage = () => {
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = ({ name, email, password }: IFormInputs) =>
+    Register({ name, email, password });
   return (
     <Container
       display="flex"
