@@ -2,6 +2,7 @@ import notesApi from "@services/notesApi";
 import { createContext, useContext, useState } from "react";
 import { NoteProps } from "../types/NoteProps";
 import { GlobalToolsContext } from "./GlobalToolsContext";
+import { UserContext } from "./UserContext";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ interface ProviderProps {
 interface NotesContextProps {
   List: () => Promise<void>;
   Create: () => Promise<void>;
-  Delete: (id: string) => Promise<void>;
+  DeleteNote: (id: string) => Promise<void>;
   notes: NoteProps[] | never[];
 }
 
@@ -18,6 +19,7 @@ export const NotesContext = createContext({} as NotesContextProps);
 
 export const NotesContextProvider = ({ children }: ProviderProps) => {
   const { handleLoading, handleAlert } = useContext(GlobalToolsContext);
+  const { Exit } = useContext(UserContext);
   const [notes, setNotes] = useState<NoteProps[] | never[]>([]);
 
   async function List() {
@@ -29,6 +31,7 @@ export const NotesContextProvider = ({ children }: ProviderProps) => {
         break;
 
       case 401:
+        Exit();
         handleAlert("error", "Unauthorized");
         break;
 
@@ -50,6 +53,7 @@ export const NotesContextProvider = ({ children }: ProviderProps) => {
         break;
 
       case 401:
+        Exit();
         handleAlert("error", "Unauthorized");
         break;
 
@@ -61,7 +65,7 @@ export const NotesContextProvider = ({ children }: ProviderProps) => {
     handleLoading(false);
   }
 
-  async function Delete(id: string) {
+  async function DeleteNote(id: string) {
     handleLoading(true);
 
     const response = await notesApi.deleteNote(id);
@@ -73,6 +77,7 @@ export const NotesContextProvider = ({ children }: ProviderProps) => {
         break;
 
       case 401:
+        Exit();
         handleAlert("error", "Unauthorized");
         break;
 
@@ -89,7 +94,7 @@ export const NotesContextProvider = ({ children }: ProviderProps) => {
   }
 
   return (
-    <NotesContext.Provider value={{ List, Create, Delete, notes }}>
+    <NotesContext.Provider value={{ List, Create, DeleteNote, notes }}>
       {children}
     </NotesContext.Provider>
   );
