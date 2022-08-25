@@ -26,7 +26,11 @@ export const CustomAlert = ({ alert }: CustomAlertProps) => {
         exit={{ bottom: -50 }}
         transition={{ duration: 0.4 }}
       >
-        <Alert status={alert && alert.status} borderRadius="lg" w="fit-content">
+        <Alert
+          status={alert && alert.status}
+          borderRadius="lg"
+          w={["full", "full", "fit-content"]}
+        >
           <AlertIcon />
           {alert && <Text>{alert.message}</Text>}
         </Alert>
