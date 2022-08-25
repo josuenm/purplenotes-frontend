@@ -1,4 +1,6 @@
 import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
+import { NotesContext } from "@contexts/NotesContext";
+import { useContext } from "react";
 import { NoteProps } from "../types/NoteProps";
 
 interface NoteCardProps {
@@ -22,6 +24,8 @@ const NoteCard = ({ note }: NoteCardProps) => {
     return newBody;
   };
 
+  const { Delete } = useContext(NotesContext);
+
   return (
     <Box
       w={["full", "full", 80]}
@@ -35,7 +39,9 @@ const NoteCard = ({ note }: NoteCardProps) => {
 
       <Flex mt={5} direction="column" gap={2}>
         <Button colorScheme="violet">Access</Button>
-        <Button colorScheme="red">Delete</Button>
+        <Button colorScheme="red" onClick={() => Delete(note._id)}>
+          Delete
+        </Button>
       </Flex>
     </Box>
   );
