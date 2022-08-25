@@ -35,6 +35,17 @@ const notesApi = {
       .catch((err) => err.response);
   },
 
+  updateNote: async (id: string, data: { title: string; body: string }) => {
+    return await api
+      .put("/" + id, data, {
+        headers: {
+          "purplenotes.token": parseCookies()["purplenotes.token"],
+        },
+      })
+      .then((res) => res)
+      .catch((err) => err.response);
+  },
+
   deleteNote: async (id: string) => {
     return await api
       .delete("/" + id, {
