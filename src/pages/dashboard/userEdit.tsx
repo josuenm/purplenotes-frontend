@@ -12,13 +12,31 @@ import {
 } from "@chakra-ui/react";
 import { UserContext } from "@contexts/UserContext";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import Head from "next/head";
+import { parseCookies } from "nookies";
 import { useContext, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { DeleteAlert } from "src/components/DeleteAlert";
 import HeaderWithBackButton from "src/components/HeaderWithBackButton";
-
 import * as yup from "yup";
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { "purplenotes.token": token } = parseCookies(ctx);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
 
 interface IFormBasicInfo {
   name: string;
@@ -208,6 +226,9 @@ const DeleteAccount = () => {
 const UserEdit: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>User Edit | Purple Notes</title>
+      </Head>
       <HeaderWithBackButton returnTo="/dashboard" />
       <Container py={20}>
         <Center minH="100vh">
