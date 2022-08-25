@@ -9,6 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
+import Head from "next/head";
 import NextImage from "next/image";
 import NextLink from "next/link";
 
@@ -66,6 +67,12 @@ const Header = () => {
 const Home: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>
+          Purple Notes - Create notes easily and access them whenever you want
+          in the cloud
+        </title>
+      </Head>
       <Header />
       <Container
         display="flex"
@@ -84,20 +91,22 @@ const Home: NextPage = () => {
             save your notes for free and access them whenever and wherever you
             want! Your notes will always be available and safely stored
           </Text>
-          <Button
-            textTransform="uppercase"
-            borderWidth={1}
-            borderColor="violet.600"
-            color="violet.600"
-            _hover={{
-              color: "white",
-              bgColor: "violet.600",
-            }}
-            maxW={300}
-            variant="outline"
-          >
-            Register for free now
-          </Button>
+          <NextLink href="/register">
+            <Button
+              textTransform="uppercase"
+              borderWidth={1}
+              borderColor="violet.600"
+              color="violet.600"
+              _hover={{
+                color: "white",
+                bgColor: "violet.600",
+              }}
+              maxW={300}
+              variant="outline"
+            >
+              Register for free now
+            </Button>
+          </NextLink>
         </Flex>
         <Flex mt={[15, 0, 0]} justifyContent="center">
           <Image src={AppDemoImage} alt="Demo" width={600} height={300} />
