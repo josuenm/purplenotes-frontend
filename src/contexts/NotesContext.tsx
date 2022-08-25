@@ -12,6 +12,10 @@ interface NotesContextProps {
   List: () => Promise<void>;
   Create: () => Promise<void>;
   DeleteNote: (id: string) => Promise<void>;
+  UpdateNote: (
+    id: string,
+    data: { title: string; body: string }
+  ) => Promise<void>;
   notes: NoteProps[] | never[];
 }
 
@@ -65,6 +69,24 @@ export const NotesContextProvider = ({ children }: ProviderProps) => {
     handleLoading(false);
   }
 
+  async function UpdateNote(id: string, data: { title: string; body: string }) {
+    const response = await notesApi.updateNote(id, data);
+
+    switch (response.status) {
+      case 200:
+        break;
+
+      case 401:
+        Exit();
+        handleAlert("error", "Unauthorized");
+        break;
+
+      default:
+        handleAlert("error", "Something wrong, try again");
+        break;
+    }
+  }
+
   async function DeleteNote(id: string) {
     handleLoading(true);
 
@@ -94,7 +116,9 @@ export const NotesContextProvider = ({ children }: ProviderProps) => {
   }
 
   return (
-    <NotesContext.Provider value={{ List, Create, DeleteNote, notes }}>
+    <NotesContext.Provider
+      value={{ List, Create, DeleteNote, UpdateNote, notes }}
+    >
       {children}
     </NotesContext.Provider>
   );
