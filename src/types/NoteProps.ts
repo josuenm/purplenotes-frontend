@@ -1,5 +1,5 @@
 export type NoteProps = {
-  _id: number;
+  _id: string;
   title: string;
   body: string;
 };
