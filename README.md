@@ -1,6 +1,6 @@
 # Purple Notes - front-end - Version 3.0
 
-This is a note-taking application focused on accessing from anywhere and whenever you want.
+This is a note application focused on accessing from anywhere and whenever you want.
 
 <p>
 Access now <a href="https://purplenotes.vercel.app" target="_blank">https://purplenotes.vercel.app</a>.
